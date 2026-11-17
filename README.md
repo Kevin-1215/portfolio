@@ -4,11 +4,13 @@
 
 ## 發布狀態
 
-Cloudflare 登入授權依擁有者要求延後。`config/public.json` 的 `apiUrl` 暫為空字串，公開版不會連線到 localhost，也不會收集會員帳密。會員與雲端訂單顯示準備中，形象網站、作品篩選、服務介紹、商品分類與本機購物車可操作。
+前台為 `https://kevin-1215.github.io/portfolio/`；API 為 `https://kevin-portfolio-api.kevin-design-lab.workers.dev`。Cloudflare Workers + D1 已部署，公開設定只有 API 網址與資源 ID，不含登入憑證。
 
-會員、收藏、個人偏好、登入／登出、訂單隔離與伺服器計價的程式均已完成，通過本機 D1 的 17 項整合檢查。正式會員服務需完成 Cloudflare 授權、部署及正式環境驗證後才開放。
+會員、收藏、個人偏好、登入／登出、訂單隔離與伺服器計價已通過雲端的 21 項整合檢查。驗證使用隨機產生的測試帳密，完成後刪除這兩個測試帳號及其關聯資料。帳號為作品體驗用途，沒有 Email 驗證、密碼重設或 MFA。
 
-三個作品 AURA、日常之物、FORMA 皆為自主概念，不代表商業委託或既有業績。商店不販售、不扣款、不出貨。合作表單在雲端服務啟用前提供需求摘要下載；啟用後儲存洽詢，尚未寄 Email。
+Folio 為已上線的自主開發工具；AURA、日常之物、FORMA 為自主概念，皆不代表商業委託或既有客戶業績。四個案例各自記錄問題、角色、設計取捨、驗證方式與實作範圍。商店不販售、不扣款、不出貨。
+
+首頁提供「釐清 → 編排 → 實作」互動名片示範，可改品牌、選配色、切換正反面並下載 SVG。合作入口使用擁有者確認公開的 `kevinchou@innodanc.com`，三步引導可免登入整理、複製或下載需求摘要，並開啟 Email 草稿；沒有自動寄送訊息。已登入會員可另行選擇儲存至 D1 洽詢紀錄，目前尚未啟用 Email 通知。
 
 ## 本機開發
 
@@ -18,23 +20,24 @@ Cloudflare 登入授權依擁有者要求延後。`config/public.json` 的 `apiU
 node scripts/dev-all.mjs --check
 ```
 
-啟動 `http://127.0.0.1:5173/portfolio/` 前台與 `http://127.0.0.1:8787` Worker API，並套用本機 D1 遷移。`--check` 執行 17 項整合檢查，測試資料只寫入本機 D1，與雲端分離。
+啟動 `http://127.0.0.1:5173/portfolio/` 前台與 `http://127.0.0.1:8787` Worker API，並套用本機 D1 遷移。`--check` 執行整合檢查，測試資料只寫入本機 D1，與雲端分離。開發模式連線本機 Worker；正式建置與 preview 使用 `config/public.json` 的雲端網址。
 
 ```text
 npm run check
 npm run build
+npm run check:static
 npm run preview
 ```
 
-`out/` 為含首頁、會員、商店、品牌案例和 404 的預先渲染靜態網站。`npm run preview` 可檢查與 GitHub Pages 一致的功能準備中狀態。
+`out/` 為含首頁、會員、商店、四個案例和 404 的八個預先渲染頁面。建置後會檢查站內路徑、主標題、重複 ID 與公開 API 狀態；GitHub Actions 也執行相同檢查。`npm run preview` 可檢查與公開網站一致的功能狀態。
 
 ## GitHub Pages
 
-使用新儲存庫 `Kevin-1215/portfolio`，預定網站位址為 `https://kevin-1215.github.io/portfolio/`。Settings → Pages 設定來源為 **GitHub Actions**，推送至 `main` 會執行 `.github/workflows/pages.yml`。是否發布成功以 GitHub Actions 與實際網站為準。
+使用儲存庫 `Kevin-1215/portfolio`。Settings → Pages 設定來源為 **GitHub Actions**，推送至 `main` 會執行 `.github/workflows/pages.yml`。是否發布成功以 GitHub Actions 與實際網站為準。
 
 前台完整支援 `/portfolio/` 子路徑。更新網域或儲存庫名稱時，調整 `config/public.json` 的 `basePath` 與預先渲染的 canonical URL。
 
-## 稍後接上 Cloudflare
+## Cloudflare
 
 詳見 [DEPLOYMENT.md](./DEPLOYMENT.md)。Workers 與 D1 設定在 `cloudflare/`；前台只保存公開 API 網址，沒有 Cloudflare Token、D1 直接存取憑證或會員密碼。
 

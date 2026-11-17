@@ -1,8 +1,10 @@
-# 稍後完成 Cloudflare 授權與部署
+# Cloudflare 部署與維護
 
 此文件不包含憑證。正式部署前檢查 Cloudflare 帳號，勿將 API Token、會員密碼或 session 憑證加入儲存庫。
 
-## 1. 官方登入
+目前 Worker 為 `kevin-portfolio-api.kevin-design-lab.workers.dev`，D1 為獨立的 `kevin-portfolio`，資料表遷移已套用。R2 未啟用。
+
+## 1. 官方登入（授權失效時）
 
 ```text
 npx wrangler login --scopes account:read user:read workers_scripts:write d1:write
@@ -11,13 +13,13 @@ npx wrangler whoami
 
 由擁有者在瀏覽器登入並確認官方權限。先前逾時的 OAuth URL 不能重用，請重新啟動登入流程。
 
-## 2. 建立獨立 D1
+## 2. 更新既有服務
 
 ```text
-npx wrangler d1 create kevin-portfolio --location apac
+node scripts/deploy-cloudflare.mjs
 ```
 
-把官方回傳的 database_id 原樣填入 `cloudflare/wrangler.jsonc`，取代全零的本機預覽 ID，並記錄選定的 account_id。若同名資料庫已存在，先查明用途，不覆蓋或刪除既有資料。
+此腳本核對帳號、既有 database_id 與名稱，套用尚未執行的遷移，部署 Worker，最後更新公開 API 網址。不需重新建立 D1。新增其他專案時使用獨立設定與名稱，不覆蓋現有資料。
 
 ```text
 npx wrangler d1 migrations apply DB --config cloudflare/wrangler.jsonc --remote
@@ -26,16 +28,23 @@ npx wrangler deploy --config cloudflare/wrangler.jsonc
 
 ## 3. 連接前台
 
-把部署回傳的 HTTPS Worker 網址填入 `config/public.json` 的 `apiUrl`，保留 `basePath: "/portfolio/"`。Workers 的 ALLOWED_ORIGINS 必須包含 `https://kevin-1215.github.io`。
+`config/public.json` 的 `apiUrl` 使用正式 HTTPS Worker 網址，保留 `basePath: "/portfolio/"`。Workers 的 ALLOWED_ORIGINS 必須包含 `https://kevin-1215.github.io`。
 
 ```text
 npm run check
 npm run build
+npm run check:static
 ```
 
 在 GitHub 推送這次設定，Actions 會重新發布前台。資料庫 ID 及公開 Worker 網址不是密鑰；登入憑證仍只在本機官方工具管理。
 
 ## 4. 正式驗證
+
+```text
+node scripts/check-hybrid-api.mjs --remote
+```
+
+僅允許已設定的作品集 API。21 項檢查會建立兩個隨機測試帳號，最後經官方 Wrangler 移除這兩個帳號及其關聯資料。不得改成刪除其他會員的廣泛條件。
 
 - `/api/health` 回傳 Cloudflare D1，並確認 payments disabled。
 - 確認 HTTPS 網站 CORS 預檢、會員註冊／登入、偏好儲存、收藏、模擬結帳及登出。

@@ -15,7 +15,7 @@ function equal(a: string, b: string) { let different = a.length ^ b.length; for 
 const accountSchema = z.object({ username: z.string().trim().toLowerCase().regex(/^[a-z0-9_]{3,30}$/, "帳號請使用 3–30 個英文字母、數字或底線。"), password: z.string().min(12,"密碼至少 12 個字元。").max(128) });
 const registerSchema = accountSchema.extend({ name: z.string().trim().min(1).max(40) });
 const profileSchema = z.object({ name: z.string().trim().min(1).max(40), newsletter: z.boolean() });
-const favoriteSchema = z.object({ project: z.enum(["aura","objects","forma"]), saved: z.boolean() });
+const favoriteSchema = z.object({ project: z.enum(["folio","aura","objects","forma"]), saved: z.boolean() });
 const orderSchema = z.object({ key: z.string().uuid(), lines: z.array(z.object({ id: z.string(), quantity: z.number().int().min(1).max(10) })).min(1).max(12) });
 const inquirySchema = z.object({ name:z.string().trim().min(1).max(60), email:z.string().email().max(150), service:z.enum(["品牌形象網站","會員系統","電子商務","其他合作"]), budget:z.enum(["尚未確定","5–10 萬","10–20 萬","20 萬以上"]), message:z.string().trim().min(10).max(3000) });
 async function body<T>(request: Request, schema: z.ZodType<T>): Promise<T> {

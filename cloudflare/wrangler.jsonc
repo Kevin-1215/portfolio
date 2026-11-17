@@ -1,10 +1,22 @@
 {
   "$schema": "../node_modules/wrangler/config-schema.json",
   "name": "kevin-portfolio-api",
+  "account_id": "b1f1a4e5370e7f9d2abc47bf2fb2fdd6",
   "main": "worker.ts",
   "compatibility_date": "2026-05-15",
   "workers_dev": true,
-  "vars": { "ALLOWED_ORIGINS": "https://kevin-1215.github.io,http://127.0.0.1:5173,http://localhost:5173" },
-  "d1_databases": [{ "binding": "DB", "database_name": "kevin-portfolio", "database_id": "00000000-0000-4000-8000-000000000000", "migrations_dir": "migrations" }],
-  "observability": { "enabled": true }
+  "vars": {
+    "ALLOWED_ORIGINS": "https://kevin-1215.github.io,http://127.0.0.1:5173,http://localhost:5173"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kevin-portfolio",
+      "database_id": "69c08000-7bae-40b3-b951-cd861c168578",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
 }
