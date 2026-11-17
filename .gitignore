@@ -1,0 +1,70 @@
+# Dependencies
+/node_modules/
+/.pnp
+.pnp.*
+# Keep authored Yarn tooling if the project adopts Yarn.
+/.yarn/*
+!/.yarn/patches/
+!/.yarn/plugins/
+!/.yarn/releases/
+!/.yarn/versions/
+
+# Generated builds and framework state
+/dist/
+/.next/
+/.vinext/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Test output
+/coverage/
+
+# Package-manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local environment and keys
+.env*
+.dev.vars*
+*.pem
+
+# Checkout-local tool state
+/.wrangler/
+**/.wrangler/
+/.sites-runtime/
+
+# Workspace scaffolding and publication archives
+/.agents/
+/.codex/
+/outputs/
+/work/
+
+# OS metadata
+.DS_Store
+
+# Retained local starter files; the published project uses Vite + standalone Worker.
+/.openai/
+/app/*
+!/app/globals.css
+/components/ui/
+/components/connector-error.tsx
+/lib/*
+!/lib/client.ts
+!/lib/catalog.ts
+/examples/
+/hooks/
+/vendor/
+/worker/
+/scripts/*
+!/scripts/build-pages.mjs
+!/scripts/check-hybrid-api.mjs
+!/scripts/dev-all.mjs
+!/scripts/github-release.mjs
+/next.config.ts
+/cloudflare-env.d.ts
+/components.json
+/eslint.config.mjs
+/postcss.config.mjs

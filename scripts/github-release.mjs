@@ -1,0 +1,15 @@
+import {spawnSync} from "node:child_process";
+const action=process.argv[2]||"inspect";
+const result=spawnSync("git",["credential","fill"],{input:"protocol=https\nhost=github.com\n\n",encoding:"utf8",env:{...process.env,GCM_INTERACTIVE:"never",GIT_TERMINAL_PROMPT:"0"}});
+if(result.status!==0){console.log(JSON.stringify({authenticated:false,reason:"GitHub credential is not available"}));process.exit(2);}
+const fields=Object.fromEntries(result.stdout.trim().split(/\r?\n/).map(l=>{const i=l.indexOf("=");return[l.slice(0,i),l.slice(i+1)];}));
+if(!fields.password)throw new Error("No GitHub credential available");
+async function api(path,method="GET",body){const response=await fetch("https://api.github.com"+path,{method,headers:{Authorization:`Bearer ${fields.password}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(body?{"Content-Type":"application/json"}:{})},...(body?{body:JSON.stringify(body)}:{})});const text=await response.text();let data;try{data=JSON.parse(text);}catch{data={message:"Unexpected response"};}return{status:response.status,data};}
+const me=await api("/user");if(me.status!==200){console.log(JSON.stringify({authenticated:false,status:me.status}));process.exit(2);}
+const owner=me.data.login; if(owner.toLowerCase()!=="kevin-1215")throw new Error("Authenticated GitHub account differs from the selected portfolio account");
+const repo="portfolio";const existing=await api(`/repos/${owner}/${repo}`);
+if(action==="inspect"){console.log(JSON.stringify({authenticated:true,owner,repositoryExists:existing.status===200,repositoryUrl:existing.data.html_url||null}));}
+else if(action==="create"){if(existing.status===404){const created=await api("/user/repos","POST",{name:repo,description:"Kevin — independent design & development portfolio. GitHub Pages + Cloudflare Workers + D1.",private:false,auto_init:false});if(created.status!==201)throw new Error(`Repository creation failed (${created.status}): ${created.data.message}`);console.log(JSON.stringify({created:true,url:created.data.html_url}));}else if(existing.status===200){console.log(JSON.stringify({created:false,url:existing.data.html_url}));}else throw new Error(`Repository lookup failed (${existing.status})`);}
+else if(action==="pages"){const pages=await api(`/repos/${owner}/${repo}/pages`);if(pages.status===404){const created=await api(`/repos/${owner}/${repo}/pages`,"POST",{build_type:"workflow"});if(created.status!==201)throw new Error(`Pages setup failed (${created.status}): ${created.data.message}`);console.log(JSON.stringify({pages:created.data.html_url}));}else if(pages.status===200){console.log(JSON.stringify({pages:pages.data.html_url,buildType:pages.data.build_type}));}else throw new Error(`Pages lookup failed (${pages.status})`);}
+else if(action==="status"){const runs=await api(`/repos/${owner}/${repo}/actions/runs?per_page=3`);const pages=await api(`/repos/${owner}/${repo}/pages`);console.log(JSON.stringify({pages:pages.data.html_url,status:pages.data.status,runs:runs.data.workflow_runs?.map(r=>({id:r.id,status:r.status,conclusion:r.conclusion,url:r.html_url}))}));}
+else throw new Error("Unknown release action");
