@@ -1,6 +1,5 @@
-const config = import.meta.env;
-export const basePath = config.BASE_URL || "/";
-export const apiOrigin = config.VITE_API_URL || (config.DEV ? "http://127.0.0.1:8787" : "");
+export const basePath = import.meta.env.BASE_URL || "/";
+export const apiOrigin = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:8787" : "");
 export const apiEnabled = Boolean(apiOrigin);
 export function sitePath(value: string) { const canonical=value.replace(/^(\/(?:members|shop|work\/aura))(?=[?#]|$)/,"$1/");return `${basePath.replace(/\/$/,"")}${canonical}`; }
 let memoryToken = "";
