@@ -12,8 +12,8 @@ export default function WorkflowArtwork({ id, hero = false }: { id: WorkflowId; 
     <div className="workflow-art-top"><span>{study.code}</span><span>流程示意 / STUDY</span></div>
     <div className="workflow-art-body">
       <div className="workflow-art-title">{study.title}<span className="workflow-rule" /></div>
-      <div className="workflow-track">{study.steps.map((step, i) => <div className="workflow-node" key={step}><span className="workflow-number">0{i + 1}</span><span>{step}</span><span className="workflow-node-mark" aria-hidden="true">{i === 2 ? "↗" : "+"}</span></div>)}</div>
+      <div className="workflow-track">{study.steps.map((step, i) => <div className="workflow-node" key={step}><span className="workflow-number">0{i + 1}</span><span>{step}</span></div>)}</div>
     </div>
-    <div className="workflow-art-bottom"><span>{study.caption}</span><span>KEVIN CHOU ↗</span></div>
+    <div className="workflow-art-bottom"><span>{study.caption}</span><span>KEVIN CHOU</span></div>
   </div>;
 }

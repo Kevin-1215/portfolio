@@ -64,7 +64,6 @@
 .workflow-node { position: relative; display: flex; align-items: center; gap: 12px; background: var(--workflow-bg); border: 1px solid var(--workflow-line); padding: 12px 13px; font-size: 11px; letter-spacing: .03em; }
 .workflow-number { color: var(--workflow-accent); font-size: 8px; }
 .workflow-node > span:nth-child(2) { white-space: nowrap; }
-.workflow-node-mark { margin-left: auto; color: var(--workflow-accent); font-size: 17px; line-height: 1; }
 .workflow-art-bottom { border-top: 1px solid var(--workflow-line); padding-top: 13px; font-size: 5.5px; }
 .workflow-smart-operations { --workflow-line: #bac3b1; --workflow-accent: #59694d; --workflow-paper: #2f392c; --workflow-bg: #dfe4d6; }
 .workflow-esg-platform { --workflow-line: #c3b8a5; --workflow-accent: #826c52; --workflow-paper: #3c3930; --workflow-bg: #e6dfd1; }
@@ -176,7 +175,6 @@
   .workflow-node { font-size: 9px; gap: 8px; padding: 10px 8px; }
   .workflow-track { gap: 11px; }
   .workflow-number { font-size: 7px; }
-  .workflow-node-mark { font-size: 13px; }
   .workflow-art-bottom { font-size: 4.5px; gap: 10px; padding-top: 10px; }
   .workflow-rule { margin-top: 20px; width: 27px; }
   .workflow-hero { padding: 21px 21px 64px; }

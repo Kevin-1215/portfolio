@@ -44,7 +44,7 @@ export default function Portfolio() {
         </div>
       </div>
       <div className="hero-bottom">
-        <div className="hero-side"><span className="tiny-label">CONSULTING × TECHNOLOGY<br />BASED IN TAIWAN</span><div className="hero-caption"><span className="mini-cross">+</span><p>先理解問題，<br />再讓改變發生。</p></div><a href="#about" className="scroll-cue"><span>A LITTLE ABOUT ME</span><ArrowDown size={18} /></a></div>
+        <div className="hero-side"><span className="tiny-label">CONSULTING × TECHNOLOGY<br />BASED IN TAIWAN</span><div className="hero-caption"><p>先理解問題，<br />再讓改變發生。</p></div><a href="#about" className="scroll-cue"><span>A LITTLE ABOUT ME</span><ArrowDown size={18} /></a></div>
         <a className="hero-image consultant-featured" href={sitePath("/work/finance-operations/")} aria-label="查看財務流程優化案例"><WorkflowArtwork id="finance-operations" hero /><span className="consultant-featured-caption">SELECTED EXPERIENCE / 財務流程優化 <Arrow size={18} /></span></a>
       </div>
       <div className="hero-footnote"><span>STRATEGY × PROCESS × TECHNOLOGY</span><span>從看清問題，到做出改變。</span><span>KEVIN CHOU — CONSULTANT</span></div>
@@ -87,7 +87,7 @@ export default function Portfolio() {
     </section>
 
     <section id="contact" className="contact section-pad consultant-contact">
-      <div className="contact-intro" data-reveal><SectionLabel n="04">CONTACT / 聯絡資訊</SectionLabel><h2>從一個問題，<br /><em>聊到下一步。</em><Arrow size={56} /></h2><p>想評估 AI 應用、整理工作流程，<br />或建置一個網站與系統，都可以先聊聊。</p><a className="direct-email" href={`mailto:${contactEmail}?subject=${encodeURIComponent("合作洽詢")}`}><Mail size={17} /><span>{contactEmail}</span><Arrow size={15} /></a><span className="availability"><i />OPEN FOR COLLABORATIONS</span><p className="contact-side-note">可依需求討論專案合作或顧問協作。<br />範圍、時程與交付內容，確認後再報價。</p></div>
+      <div className="contact-intro" data-reveal><SectionLabel n="04">CONTACT / 聯絡資訊</SectionLabel><h2>從一個問題，<br /><em>聊到下一步。</em></h2><p>想評估 AI 應用、整理工作流程，<br />或建置一個網站與系統，都可以先聊聊。</p><a className="direct-email" href={`mailto:${contactEmail}?subject=${encodeURIComponent("合作洽詢")}`}><Mail size={17} /><span>{contactEmail}</span><Arrow size={15} /></a><span className="availability"><i />OPEN FOR COLLABORATIONS</span><p className="contact-side-note">可依需求討論專案合作或顧問協作。<br />範圍、時程與交付內容，確認後再報價。</p></div>
       <div className="contact-form-wrap"><ContactBrief selectedService={briefService} selectionKey={briefSelection} /></div>
     </section>
   </main><Footer /></div>;
