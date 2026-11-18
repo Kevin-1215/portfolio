@@ -5,7 +5,7 @@ import { post, useMember } from "./site";
 import { serviceNames, type ServiceName } from "@/lib/services";
 export const contactEmail = "kevinchou@innodanc.com";
 const services = [...serviceNames, "其他合作"];
-const featureOptions = ["AI 應用評估", "流程盤點與 SOP", "RPA / OCR 自動化", "網站與會員功能", "SEO 技術檢查", "既有系統整合", "資料平台與報表", "一起釐清需求"];
+const featureOptions = ["AI 應用評估", "流程盤點與 SOP", "AI Automation 導入", "網站與會員功能", "SEO 技術檢查", "既有系統整合", "資料平台與報表", "一起釐清需求"];
 const steps = ["想做什麼", "範圍與時程", "整理與聯絡"];
 type Brief = { service: string; features: string[]; budget: string; timeframe: string; message: string; name: string; email: string };
 export default function ContactBrief({ selectedService = serviceNames[0], selectionKey = 0 }: { selectedService?: ServiceName; selectionKey?: number }) {

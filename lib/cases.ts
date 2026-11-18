@@ -7,6 +7,9 @@ export type CaseStudyData = {
   flow: { title: string; note: string }[]; checks: string[]; boundary: string;
   demo?: string; demoLabel?: string; external?: boolean; stack: string;
 };
+export function caseTitle(project: CaseStudyData) {
+  return project.group === "consulting" ? project.name : `${project.type}展示｜${project.name}`;
+}
 export const cases: CaseStudyData[] = [
   ...consultingCases,
   {

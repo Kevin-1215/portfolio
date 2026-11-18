@@ -7,14 +7,14 @@ export const inquiryServices = [...serviceNames, "其他合作", "品牌形象�
 export const services: { title: ServiceName; english: string; description: string; deliverables: string; example?: string }[] = [
   {
     title: "AI 顧問服務", english: "AI advisory",
-    description: "想導入 AI，先從值得解決的問題開始。透過需求訪談與現況評估，整理適合的應用情境、資料條件與導入順序，並把構想轉成可討論、可實作的規格。",
-    deliverables: "應用情境與可行性評估 / 導入路徑 / PoC 範圍與驗收條件 / 團隊工作坊",
+    description: "從企業真正需要解決的問題出發，評估 AI Automation、生成式 AI 助理與 AI OCR 的應用情境。透過需求訪談與資料條件盤點，整理導入順序、PoC 範圍與實作規格。",
+    deliverables: "AI Automation 應用盤點 / 技術可行性與導入路徑 / PoC 範圍與驗收條件 / AI 應用工作坊",
     example: "smart-operations",
   },
   {
-    title: "流程優化", english: "Process improvement",
-    description: "當工作仰賴人工追蹤、重複輸入或口頭交接，先把現況理清。從跨角色訪談、流程圖與 SOP 著手，找到資訊斷點，再評估 RPA、OCR 與系統整合的切入點。",
-    deliverables: "現況盤點與訪談 / As-Is 與 To-Be 流程 / SOP 與權責整理 / 自動化建議",
+    title: "流程優化", english: "Process & AI automation",
+    description: "從跨角色訪談、流程圖與 SOP 著手，找出重複輸入、人工追蹤與交接斷點，再規劃 AI Automation 的切入點。依工作性質結合 AI OCR、生成式 AI、RPA 或 API，讓辨識、資訊整理與後續執行接得起來。",
+    deliverables: "現況盤點與訪談 / As-Is 與 To-Be 流程 / SOP 與權責整理 / AI Automation 導入建議",
     example: "finance-operations",
   },
   {
@@ -30,7 +30,7 @@ export const services: { title: ServiceName; english: string; description: strin
   },
   {
     title: "其他系統建置", english: "Systems & integration",
-    description: "把分散的資料與操作接起來。依現有工具與維護需求，規劃內部管理系統、資料平台、報表及 API 串接，並把權限、資料一致性與例外處理納入設計。",
+    description: "把 AI 應用接上實際工作。依現有工具與維護需求，規劃 AI 助理、內部管理系統、資料平台及 API 串接，並將權限、資料一致性與例外處理納入 AI Automation 方案。",
     deliverables: "需求分析與資料規劃 / 內部工具與管理介面 / API 與既有系統串接 / 操作交接",
     example: "esg-platform",
   },

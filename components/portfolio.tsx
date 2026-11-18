@@ -4,6 +4,7 @@ import { Header, Footer, Arrow, SectionLabel, ProjectVisual, projectInfo, sitePa
 import WorkflowArtwork from "./workflow-art";
 import ContactBrief, { contactEmail } from "./contact-brief";
 import { services, type ServiceName } from "@/lib/services";
+import { caseTitle } from "@/lib/cases";
 
 export default function Portfolio() {
   const [group, setGroup] = useState<"consulting" | "systems">("consulting");
@@ -33,12 +34,12 @@ export default function Portfolio() {
 
   return <div ref={root} className="consultant-site"><Header /><main id="main">
     <section className="hero consultant-hero" aria-labelledby="hero-heading">
-      <div className="hero-top"><span className="eyebrow">KEVIN CHOU / AI & DIGITAL TRANSFORMATION</span><span className="availability"><i />開放合作洽詢</span></div>
+      <div className="hero-top"><span className="eyebrow">KEVIN CHOU / AI AUTOMATION & DIGITAL TRANSFORMATION</span><span className="availability"><i />開放合作洽詢</span></div>
       <div className="hero-heading-wrap">
         <h1 id="hero-heading">Clarity<br /><span className="hero-second">at work<span className="hero-dot">.</span></span></h1>
         <div className="hero-intro">
           <p>讓流程更順，<br />讓技術真正落地。</p>
-          <span>周靖翔 Kevin Chou<br />AI 與數位轉型顧問<br />從流程診斷到系統實作，<br />把改變帶進日常工作。</span>
+          <span>周靖翔 Kevin Chou<br />AI Automation 與數位轉型顧問<br />從 AI 應用評估到系統整合，<br />把改變帶進日常工作。</span>
           <div className="hero-actions"><a href="#services" className="text-link">了解服務內容 <ArrowDown size={16} /></a><a href="#contact">討論你的需求 <Arrow size={15} /></a></div>
         </div>
       </div>
@@ -53,14 +54,14 @@ export default function Portfolio() {
       <div className="about-label" data-reveal>
         <SectionLabel n="01">ABOUT ME / 關於我</SectionLabel>
         <div className="about-mark" aria-hidden="true"><span>k</span><i>°</i></div>
-        <div className="consultant-identity"><strong>周靖翔 <span>Kevin Chou</span></strong><p>AI 與數位轉型顧問<br />InnoArk 伊諾方舟科技 · 共同創辦人</p></div>
+        <div className="consultant-identity"><strong>周靖翔 <span>Kevin Chou</span></strong><p>AI Automation 與數位轉型顧問<br />InnoArk 伊諾方舟科技 · 共同創辦人</p></div>
       </div>
       <div className="about-content" data-reveal>
         <h2>理解業務的語言，<br />也看得見技術的細節。</h2>
-        <p className="about-lead">把顧問思考與開發實作，放在同一條路上。</p>
-        <p>我的工作橫跨數位轉型顧問、RPA 自動化與系統開發，具 KPMG 管理顧問與精誠資訊開發經歷，並共同創立 InnoArk 伊諾方舟科技。</p>
-        <p>資訊管理與財務金融的背景，讓我習慣同時理解作業目的、資料邏輯與技術條件。從主管訪談、第一線流程梳理，到 AI、OCR、RPA 與網站系統，我在意的是方案能否接上每天真正發生的工作。</p>
-        <div className="experience-lines"><div><span>CONSULTING</span><p>需求訪談 · 流程診斷 · 數位轉型規劃</p></div><div><span>IMPLEMENTATION</span><p>AI 應用 · RPA / OCR · 網站與系統整合</p></div><div><span>ENABLEMENT</span><p>SOP 與交接 · 企業培訓 · 技術工作坊</p></div></div>
+        <p className="about-lead">從 AI 應用評估、流程設計，到自動化整合。</p>
+        <p>我的工作聚焦 AI Automation、生成式 AI 應用與系統整合，具 KPMG 管理顧問與精誠資訊開發經歷，並共同創立 InnoArk 伊諾方舟科技。我協助企業釐清 AI 導入機會，將業務需求轉成具體的流程與實作方案。</p>
+        <p>資訊管理與財務金融的背景，讓我能從作業目的、資料邏輯與技術條件一起思考。從生成式 AI 助理、AI OCR 文件辨識，到 RPA 與 API 串接，讓 AI Automation 接上每天真正發生的工作。</p>
+        <div className="experience-lines"><div><span>CONSULTING</span><p>AI 應用評估 · 需求與流程診斷 · 導入規劃</p></div><div><span>IMPLEMENTATION</span><p>AI Automation · 生成式 AI · AI OCR · 系統整合</p></div><div><span>ENABLEMENT</span><p>AI 應用培訓 · 技術工作坊 · SOP 與交接</p></div></div>
       </div>
     </section>
 
@@ -78,8 +79,8 @@ export default function Portfolio() {
       <div className="work-toolbar"><div className="filters case-groups" aria-label="參考案例分類">{[["consulting", "顧問與流程專案"], ["systems", "網站與系統展示"]].map(([value, label]) => <button key={value} aria-pressed={group === value} className={group === value ? "active" : ""} onClick={() => selectGroup(value as "consulting" | "systems")}>{label}<sup>04</sup></button>)}</div><span className="tiny-label">CONTEXT BEFORE CONCLUSIONS</span></div>
       <p className="case-group-description" role="status">{group === "consulting" ? "三個過往專案的匿名經歷摘要，以及一份流程架構規格示例。" : "一個已上線的自主開發工具，以及品牌、電商與會員系統的可操作展示。"}</p>
       <div className={`projects-grid ${group === "consulting" ? "consulting-grid" : "systems-grid"}`}>{shown.map(project => <article key={project.id} className={`project-card project-${project.id}`}>
-        <a className="project-link" href={project.href} aria-label={`探索 ${project.name} ${project.type}案例`}><ProjectVisual id={project.id} /><span className="project-hover">了解問題與做法 <Arrow /></span></a>
-        <div className="project-meta"><div><h3><a href={project.href}>{project.name}</a></h3><p>{project.subtitle}</p><span className="case-status">{project.status}</span></div><a className="project-arrow" href={project.href} aria-label={`開啟 ${project.name} 案例`}><Arrow /></a></div>
+        <a className="project-link" href={project.href} aria-label={`探索 ${caseTitle(project)} 案例`}><ProjectVisual id={project.id} /><span className="project-hover">了解問題與做法 <Arrow /></span></a>
+        <div className="project-meta"><div><h3><a href={project.href}>{caseTitle(project)}</a></h3><p>{project.subtitle}</p><span className="case-status">{project.status}</span></div><a className="project-arrow" href={project.href} aria-label={`開啟 ${caseTitle(project)} 案例`}><Arrow /></a></div>
         <div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
       </article>)}</div>
       <p className="work-note"><span>↳</span>{group === "consulting" ? "企業專案以匿名摘要呈現；案例圖像為流程示意。" : "自主專案與概念展示各自標明範圍；概念商店不會扣款或出貨。"}</p>

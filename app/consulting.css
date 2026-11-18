@@ -44,7 +44,9 @@
 .case-group-description { font-size: 11px; line-height: 1.9; color: var(--muted); margin: -5px 0 35px; }
 .consulting-grid { align-items: start; }
 .consulting-grid .project-card:nth-child(even) { margin-top: 55px; }
-.consulting-grid .project-meta h3 { font-size: 23px; letter-spacing: .01em; line-height: 1.6; }
+.consulting-grid .project-meta h3 { font-size: 23px; letter-spacing: .01em; line-height: 1.6; text-wrap: balance; }
+.systems-grid .project-meta h3 { font-size: clamp(19px, 2vw, 25px); line-height: 1.5; letter-spacing: 0; text-wrap: balance; }
+.case-heading-tagline { font-size: clamp(17px, 1.8vw, 24px); color: var(--muted); line-height: 1.7; margin-top: 15px; }
 .consultant-work .project-meta { gap: 20px; }
 .case-status { display: inline-block; font-size: 9px; color: #7a7d70; margin-top: 7px; line-height: 1.8; }
 .consultant-work .project-meta p { margin-top: 5px; }
