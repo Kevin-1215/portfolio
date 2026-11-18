@@ -19,8 +19,20 @@ for (const file of pages) {
     await fs.access(target).catch(() => { throw new Error(`${file}: broken local reference ${raw}`); }); links++;
   }
 }
-for (const id of ["folio", "aura", "objects", "forma"]) await fs.access(`out/work/${id}/index.html`);
+for (const id of ["finance-operations", "smart-operations", "esg-platform", "purchase-workflow", "folio", "aura", "objects", "forma"]) await fs.access(`out/work/${id}/index.html`);
+const homepage = await fs.readFile("out/index.html", "utf8");
+let previousSection = -1;
+for(const id of ["main", "about", "services", "work", "contact"]){
+  const position=homepage.indexOf(`id="${id}"`);
+  assert.ok(position>previousSection,`Homepage section is missing or out of order: ${id}`);
+  previousSection=position;
+}
+for(const service of ["AI 顧問服務", "流程優化", "網站建置", "SEO 優化", "其他系統建置"])assert.ok(homepage.includes(service),`Missing requested service: ${service}`);
+assert.ok(homepage.includes("周靖翔")&&homepage.includes("Kevin Chou"),"Homepage must identify the consultant");
+const publicEmails=[...homepage.matchAll(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)].map(match=>match[0]);
+assert.ok(publicEmails.every(email=>email==="kevinchou@innodanc.com"),"Only the approved business email may be published");
+assert.ok(!/(?<!\d)09\d{2}[-\s]?\d{3}[-\s]?\d{3}(?!\d)/.test(homepage),"Reference-only mobile contact data must not be published");
 const bundle = (await Promise.all(files.filter(file => file.endsWith(".js")).map(file => fs.readFile(file, "utf8")))).join("");
 assert.ok(!bundle.includes("127.0.0.1:8787"), "Published bundle must not call a development API");
 if(config.apiUrl)assert.ok(bundle.includes(config.apiUrl),"Published bundle must use the configured cloud API");
-console.log(`PASS ${pages.length} pre-rendered pages, ${links} local references, unique IDs, case routes and public API state.`);
+console.log(`PASS ${pages.length} pre-rendered pages, ${links} local references, unique IDs, 8 case routes, requested section order, 5 services and cloud API state.`);

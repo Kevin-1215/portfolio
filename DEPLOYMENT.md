@@ -44,7 +44,7 @@ npm run check:static
 node scripts/check-hybrid-api.mjs --remote
 ```
 
-僅允許已設定的作品集 API。21 項檢查會建立兩個隨機測試帳號，最後經官方 Wrangler 移除這兩個帳號及其關聯資料。不得改成刪除其他會員的廣泛條件。
+僅允許已設定的作品集 API。23 項檢查會建立兩個隨機測試帳號，最後經官方 Wrangler 移除這兩個帳號及其關聯資料。包含五項新服務與每日洽詢限制，不得改成刪除其他會員的廣泛條件。
 
 - `/api/health` 回傳 Cloudflare D1，並確認 payments disabled。
 - 確認 HTTPS 網站 CORS 預檢、會員註冊／登入、偏好儲存、收藏、模擬結帳及登出。

@@ -50,12 +50,15 @@ yarn-error.log*
 /app/*
 !/app/globals.css
 !/app/enhancements.css
+!/app/consulting.css
 /components/ui/
 /components/connector-error.tsx
 /lib/*
 !/lib/client.ts
 !/lib/catalog.ts
 !/lib/cases.ts
+!/lib/consulting.ts
+!/lib/services.ts
 /examples/
 /hooks/
 /vendor/

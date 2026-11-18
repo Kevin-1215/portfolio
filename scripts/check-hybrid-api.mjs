@@ -31,6 +31,11 @@ check((await req("/api/orders",{key:crypto.randomUUID(),lines:[{id:"vase-01",qua
 const payload={key:crypto.randomUUID(),lines:[{id:"vase-01",quantity:1,price:1}],total:1};const order=await req("/api/orders",payload,token);check(order.data.total===1800,"server recalculates catalog prices and shipping");
 const again=await req("/api/orders",payload,token);check(again.data.id===order.data.id,"idempotency key prevents duplicate orders");
 const second=await req("/api/auth/register",{username:username+"b",password,name:"Other QA"});const two=await req("/api/me",undefined,second.data.token);check(two.data.orders.length===0&&two.data.favorites.length===0,"member records are isolated between accounts");
+const services=["AI 顧問服務","流程優化","網站建置","SEO 優化","其他系統建置"];
+const inquiries=[];
+for(const service of services)inquiries.push(await req("/api/inquiries",{name:"Service QA",email:"qa@example.com",service,budget:"尚未確定",message:"Synthetic service validation; no email is sent."},second.data.token));
+check(inquiries.every(result=>result.status===200&&result.data.success),"all five public service types are accepted by the cloud API");
+check((await req("/api/inquiries",{name:"Limit QA",email:"qa@example.com",service:services[0],budget:"尚未確定",message:"Synthetic sixth inquiry verifies the daily limit."},second.data.token)).status===429,"inquiry daily limit remains enforced");
 await req("/api/auth/logout",{},token);check((await req("/api/me",undefined,token)).data.user===null,"logout invalidates the server session");
 check((await req("/api/me",undefined,login.data.token)).data.user.email===username,"separate login session remains usable");
 console.log(`${passed} hybrid API checks passed (${remote?"Cloudflare":"local D1"}).`);

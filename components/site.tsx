@@ -5,14 +5,15 @@ export { sitePath } from "@/lib/client";
 import { ArrowUpRight, ArrowLeft, Menu, X, UserRound } from "lucide-react";
 import { cases } from "@/lib/cases";
 import { FolioArtwork } from "./card-art";
+import WorkflowArtwork from "./workflow-art";
 
 export function Header({ inner = false }: { inner?: boolean }) {
   const [open, setOpen] = useState(false);
   useEffect(() => { const close = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); }; document.addEventListener("keydown", close); return () => document.removeEventListener("keydown", close); }, []);
-  return <header className="site-header"><a href={sitePath("/")} className="wordmark" aria-label="Kevin 首頁">kevin<span>°</span></a><span className="header-role">INDEPENDENT DESIGNER<br />& CREATIVE DEVELOPER</span><nav aria-label="主要導覽" className={open ? "main-nav is-open" : "main-nav"}>{[["work", "精選作品"], ["about", "關於"], ["services", "服務"]].map(([id, name]) => <a key={id} href={`${inner ? sitePath("/") : ""}#${id}`} onClick={() => setOpen(false)}>{name}</a>)}</nav><div className="header-actions"><a href={sitePath("/members")} className="icon-link" aria-label="會員中心"><UserRound size={18} strokeWidth={1.5} /></a><a href={`${inner ? sitePath("/") : ""}#contact`} className="contact-link">聊聊你的計畫 <ArrowUpRight size={16} /></a><button className="menu-toggle" aria-expanded={open} aria-label={open ? "關閉選單" : "開啟選單"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></header>;
+  return <header className="site-header consultant-header"><a href={sitePath("/")} className="wordmark" aria-label="Kevin 首頁">kevin<span>°</span></a><span className="header-role">AI & DIGITAL<br />TRANSFORMATION CONSULTANT</span><nav aria-label="主要導覽" className={open ? "main-nav is-open" : "main-nav"}>{[["main", "首頁"], ["about", "關於我"], ["services", "服務內容"], ["work", "參考案例"], ["contact", "聯絡資訊"]].map(([id, name]) => <a key={id} className={id === "contact" ? "contact-link" : undefined} href={`${inner ? sitePath("/") : ""}#${id}`} onClick={() => setOpen(false)}>{name}{id === "contact" && <ArrowUpRight size={15} />}</a>)}</nav><div className="header-actions"><button className="menu-toggle" aria-expanded={open} aria-label={open ? "關閉選單" : "開啟選單"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></header>;
 }
-export function Footer() { return <footer className="site-footer"><a href={sitePath("/")} className="wordmark">kevin<span>°</span></a><p>用心設計，認真做好。</p><span>© {new Date().getFullYear()} KEVIN · TAIWAN</span><a href={sitePath("/#main")}>BACK TO TOP ↑</a></footer>; }
-export function BackLink() { return <a className="back-link" href={sitePath("/#work")}><ArrowLeft size={16} /> 回到作品集</a>; }
+export function Footer() { return <footer className="site-footer consultant-footer"><a href={sitePath("/")} className="wordmark">kevin<span>°</span></a><p>把流程理清，讓技術落地。</p><div className="footer-experiences"><a href={sitePath("/?work=systems#work")}>網站與系統展示 ↗</a><a href={sitePath("/members/")}><UserRound size={12} />會員體驗</a></div><span>© {new Date().getFullYear()} KEVIN CHOU · TAIWAN</span><a href={sitePath("/#main")}>BACK TO TOP ↑</a></footer>; }
+export function BackLink({ systems = true }: { systems?: boolean }) { return <a className="back-link" href={sitePath(systems ? "/?work=systems#work" : "/#work")}><ArrowLeft size={16} /> 回到參考案例</a>; }
 export function Arrow({ size = 20 }: { size?: number }) { return <ArrowUpRight size={size} strokeWidth={1.4} aria-hidden="true" />; }
 export function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) { return <p className="eyebrow"><span className="section-num">{n}</span>{children}</p>; }
 export function Pottery({ shape = "vase", color = "chalk", className = "" }: { shape?: string; color?: string; className?: string }) {
@@ -22,6 +23,7 @@ export function Pottery({ shape = "vase", color = "chalk", className = "" }: { s
 }
 export const projectInfo = cases.map(project => ({ ...project, href: sitePath(`/work/${project.id}/`) }));
 export function ProjectVisual({ id }: { id: string }) {
+  if (id === "finance-operations" || id === "smart-operations" || id === "esg-platform" || id === "purchase-workflow") return <WorkflowArtwork id={id} />;
   if (id === "folio") return <div className="project-art folio-project-art"><FolioArtwork /></div>;
   if (id === "aura") return <div className="project-art aura-art"><img src={sitePath("/images/architecture.jpg")} alt="自然光穿過落地窗的現代生活空間" width="1600" height="1088" loading="lazy" /><div className="aura-art-top"><span>AURA</span><span>SPACES FOR LIVING.</span></div><span className="aura-art-bottom">The art of<br /><i>feeling at home.</i></span><span className="art-index">RESIDENCE — 001</span></div>;
   if (id === "objects") return <div className="project-art objects-art"><div className="objects-brand">日常之物 <small>OBJECTS OF EVERYDAY</small></div><Pottery /><span className="objects-title">Less, but<br /><i>closer to you.</i></span><span className="art-index">COLLECTION 01 / 土與形</span></div>;

@@ -1,12 +1,14 @@
-export type CaseId = "folio" | "aura" | "objects" | "forma";
+import { consultingCases } from "./consulting";
+export type CaseId = "finance-operations" | "smart-operations" | "esg-platform" | "purchase-workflow" | "folio" | "aura" | "objects" | "forma";
 export type CaseStudyData = {
-  id: CaseId; index: string; name: string; subtitle: string; type: string; status: string;
+  id: CaseId; group?: "consulting"; index: string; name: string; subtitle: string; type: string; status: string;
   english: string; intro: string; tags: string[]; role: string; scope: string;
   question: string; context: string; decisions: { title: string; text: string }[];
   flow: { title: string; note: string }[]; checks: string[]; boundary: string;
   demo?: string; demoLabel?: string; external?: boolean; stack: string;
 };
 export const cases: CaseStudyData[] = [
+  ...consultingCases,
   {
     id: "folio", index: "01", name: "Folio", subtitle: "把品牌，交到自己手上。", type: "互動工具", status: "自主開發 · 已上線",
     english: "A small card. A considered tool.", intro: "從編輯資料、調整版式，到預覽與匯出。一個將名片設計整理成清楚操作流程的瀏覽器工具。",
@@ -30,7 +32,7 @@ export const cases: CaseStudyData[] = [
     decisions: [
       { title: "讓照片有自己的位置。", text: "以暖白底色、細線與少量文字建立層次，讓攝影承載主要視覺。標題負責傳遞品牌語氣，作品入口則提供清楚的下一步。" },
       { title: "依螢幕重新安排觀看方式。", text: "桌面以橫向構圖帶出空間；手機調整圖片比例與文字排列，維持畫面重點與閱讀順序。段落留白隨畫面寬度調整。" },
-      { title: "細節回應使用者的節奏。", text: "首頁以微幅影像位移回應滑鼠，段落隨閱讀進入畫面；減少動態偏好會停用這些效果。主要導覽與內容仍以原生連結與語意化結構呈現。" },
+      { title: "細節回應使用者的節奏。", text: "作品卡片以克制的過渡回應滑鼠，段落隨閱讀進入畫面；減少動態偏好會停用這些效果。主要導覽與內容仍以原生連結與語意化結構呈現。" },
     ],
     flow: [{ title: "第一眼", note: "建立品牌語氣" }, { title: "看作品", note: "影像與標題形成節奏" }, { title: "理解想法", note: "閱讀設計選擇與細節" }, { title: "開始合作", note: "抵達清楚的聯絡入口" }],
     checks: ["已檢查桌面與手機構圖，圖片具有替代文字與預留尺寸。", "導覽、案例入口與跳至內容連結可使用鍵盤操作。", "支援 prefers-reduced-motion，保留內容可讀性。"],
@@ -48,7 +50,7 @@ export const cases: CaseStudyData[] = [
       { title: "把訂單正確性放在伺服器。", text: "Workers 從商品目錄重新計價，驗證數量與商品 ID；相同會員重試同一個訂單識別碼時，會取得原訂單。訂單儲存在 D1，已在部署環境驗證價格重算與重試去重。" },
     ],
     flow: [{ title: "探索商品", note: "依陶作、花器與日用分類" }, { title: "放入購物袋", note: "調整數量與保留選物" }, { title: "核對金額", note: "即時計算小計與運費" }, { title: "模擬訂單", note: "登入後建立 D1 示範紀錄" }],
-    checks: ["購物袋已驗證數量調整、運費門檻與重新整理後保留。", "雲端 API 的 21 項整合檢查通過，涵蓋價格重算、重試去重與跨帳號隔離。", "頁面清楚標示概念商品、無實際扣款及出貨。"],
+    checks: ["購物袋已驗證數量調整、運費門檻與重新整理後保留。", "雲端 API 的 23 項整合檢查通過，涵蓋價格重算、重試去重與跨帳號隔離。", "頁面清楚標示概念商品、無實際扣款及出貨。"],
     boundary: "商品為自主概念，不販售、不扣款、不出貨。雲端模擬訂單已啟用；真實付款、庫存扣除、物流與退貨流程尚未串接。",
     demo: "/shop/", demoLabel: "體驗商品與購物袋", stack: "React / TypeScript / localStorage / Cloudflare Workers + D1",
   },

@@ -1,1 +1,4 @@
-{ "basePath": "/portfolio/", "apiUrl": "https://kevin-portfolio-api.kevin-design-lab.workers.dev" }
+{
+  "basePath": "/portfolio/",
+  "apiUrl": "https://kevin-portfolio-api.kevin-design-lab.workers.dev"
+}

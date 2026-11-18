@@ -1,0 +1,203 @@
+:root { --navy: #202c3b; --copper: #ba947c; }
+.consultant-header .main-nav { align-items: center; gap: clamp(20px, 2.2vw, 36px); }
+.consultant-header .main-nav .contact-link { gap: 18px; font-size: 12px; padding: 10px 0; }
+.consultant-header .contact-link:after { display: none; }
+.consultant-header .header-actions { gap: 0; }
+.consultant-header .header-role { letter-spacing: .06em; }
+.consultant-hero .hero-heading-wrap { margin-top: 40px; margin-bottom: 45px; }
+.consultant-hero .hero-intro { width: 300px; }
+.consultant-hero .hero-second { font-size: 1.08em; line-height: 1.05; }
+.consultant-hero .hero-intro > p { margin-bottom: 17px; }
+.hero-actions { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+.hero-actions .text-link { margin-top: 0; gap: 22px; }
+.hero-actions > a:last-child { display: inline-flex; gap: 10px; align-items: center; font-size: 11px; color: var(--muted); padding: 10px 0; }
+.consultant-featured { height: clamp(330px, 29vw, 450px); background: var(--navy); }
+.consultant-featured .workflow-art { height: 100%; aspect-ratio: auto; }
+.consultant-featured-caption { position: absolute; bottom: 20px; left: 34px; right: 34px; display: flex; justify-content: space-between; align-items: center; color: #dfdcd0; border-top: 1px solid #55606b; padding-top: 16px; font-size: 9px; letter-spacing: .1em; }
+.consultant-featured-caption svg { transition: transform .3s; }
+.consultant-featured:hover .consultant-featured-caption svg { transform: translate(3px, -3px); }
+.consultant-about { margin-top: 76px; gap: 75px; }
+.consultant-identity { margin-top: 5px; }
+.consultant-identity strong { display: block; font-size: 22px; font-weight: 400; letter-spacing: .08em; }
+.consultant-identity strong span { display: block; font-size: 18px; font-family: Georgia, serif; letter-spacing: -.02em; margin-top: 8px; }
+.consultant-identity p { margin-top: 18px; line-height: 2; font-size: 11px; color: #656d5c; }
+.consultant-about .about-mark { margin: 33px 0 27px; font-size: 145px; }
+.consultant-about .about-mark i { font-size: 80px; right: -40px; }
+.consultant-about .about-content h2 { margin-top: 43px; }
+.experience-lines { margin-top: 30px; border-top: 1px solid #c8cbbd; }
+.experience-lines > div { display: grid; grid-template-columns: 120px 1fr; align-items: baseline; gap: 20px; padding: 15px 0; border-bottom: 1px solid #c8cbbd; }
+.experience-lines span { color: #717969; font-size: 8px; letter-spacing: .08em; }
+.experience-lines p { font-size: 11px; line-height: 1.8; }
+.service-deliverables strong { display: block; font-weight: 400; color: #747b6b; font-size: 9px; margin-bottom: 5px; }
+.service-links { display: flex; gap: 35px; align-items: center; margin-top: 17px; }
+.service-links > a:last-child:not(:first-child) { font-size: 11px; display: inline-flex; gap: 12px; align-items: center; color: var(--muted); padding: 10px 0; }
+.consulting-method { margin-top: 60px; border-top: 1px solid var(--line); padding-top: 30px; display: grid; grid-template-columns: 1fr 3fr; gap: 40px; }
+.consulting-method > div h3 { font-size: 17px; margin-top: 14px; line-height: 1.7; }
+.consulting-method .tiny-label { color: var(--muted); font-size: 8px; }
+.consulting-method ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+.consulting-method li > span { font-size: 9px; color: #898d7d; }
+.consulting-method h4 { margin: 15px 0 10px; font-size: 14px; }
+.consulting-method p { color: var(--muted); font-size: 11px; line-height: 1.9; }
+.consultant-work { padding-top: 40px; }
+.case-groups { gap: 35px; }
+.case-groups button { font-size: 12px; }
+.case-group-description { font-size: 11px; line-height: 1.9; color: var(--muted); margin: -5px 0 35px; }
+.consulting-grid { align-items: start; }
+.consulting-grid .project-card:nth-child(even) { margin-top: 55px; }
+.consulting-grid .project-meta h3 { font-size: 23px; letter-spacing: .01em; line-height: 1.6; }
+.consultant-work .project-meta { gap: 20px; }
+.case-status { display: inline-block; font-size: 9px; color: #7a7d70; margin-top: 7px; line-height: 1.8; }
+.consultant-work .project-meta p { margin-top: 5px; }
+.consultant-work .project-tags { margin-top: 16px; }
+.consultant-work .project-arrow { margin-top: 4px; flex-shrink: 0; }
+.workflow-art { --workflow-line: #56606a; --workflow-accent: #c7a58d; --workflow-paper: #efede3; --workflow-bg: #202c3b; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding: 27px 31px; background: var(--workflow-bg); color: var(--workflow-paper); aspect-ratio: 1.4; }
+.workflow-art-top, .workflow-art-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 7px; line-height: 1.6; letter-spacing: .09em; color: var(--workflow-accent); }
+.workflow-art-top > span:last-child { font-size: 7px; color: var(--workflow-paper); opacity: .65; }
+.workflow-art-body { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: 25px; flex: 1; }
+.workflow-art-title { font-size: clamp(33px, 4.2vw, 69px); line-height: 1.02; letter-spacing: -.065em; }
+.workflow-art-title i { font-family: Georgia, serif; font-size: 1.18em; font-weight: 400; letter-spacing: -.055em; }
+.workflow-rule { display: block; width: 35px; margin-top: 24px; border-top: 1px solid var(--workflow-accent); }
+.workflow-track { display: flex; flex-direction: column; gap: 14px; position: relative; }
+.workflow-track:before { content: ""; position: absolute; top: 0; bottom: 0; left: 24px; width: 1px; background: var(--workflow-line); }
+.workflow-node { position: relative; display: flex; align-items: center; gap: 12px; background: var(--workflow-bg); border: 1px solid var(--workflow-line); padding: 12px 13px; font-size: 11px; letter-spacing: .03em; }
+.workflow-number { color: var(--workflow-accent); font-size: 8px; }
+.workflow-node > span:nth-child(2) { white-space: nowrap; }
+.workflow-node-mark { margin-left: auto; color: var(--workflow-accent); font-size: 17px; line-height: 1; }
+.workflow-art-bottom { border-top: 1px solid var(--workflow-line); padding-top: 13px; font-size: 5.5px; }
+.workflow-smart-operations { --workflow-line: #bac3b1; --workflow-accent: #59694d; --workflow-paper: #2f392c; --workflow-bg: #dfe4d6; }
+.workflow-esg-platform { --workflow-line: #c3b8a5; --workflow-accent: #826c52; --workflow-paper: #3c3930; --workflow-bg: #e6dfd1; }
+.workflow-purchase-workflow { --workflow-line: #626e76; --workflow-accent: #c5c9b8; --workflow-paper: #edebe2; --workflow-bg: #3b4a52; }
+.workflow-hero { padding: 29px 35px 77px; }
+.workflow-hero .workflow-art-title { font-size: clamp(48px, 6.8vw, 99px); }
+.workflow-hero .workflow-art-body { grid-template-columns: 1.1fr 1fr; gap: 55px; }
+.workflow-hero .workflow-node { padding: 15px 18px; font-size: 12px; }
+.workflow-hero .workflow-art-bottom { display: none; }
+.workflow-hero .workflow-track { max-width: 285px; }
+.consulting-case .case-heading h1 { font-size: clamp(38px, 4.2vw, 68px); line-height: 1.4; letter-spacing: .005em; margin-bottom: 18px; text-wrap: balance; }
+.consulting-case .case-heading-grid { grid-template-columns: 1.5fr 1fr; gap: 65px; }
+.consulting-case .case-heading-english { font-size: clamp(28px, 3vw, 46px); line-height: 1.2; }
+.consulting-case .case-cover .workflow-art { aspect-ratio: 2.05; padding: 45px 65px; }
+.consulting-case .case-cover .workflow-art-title { font-size: clamp(60px, 8vw, 125px); }
+.consulting-case .case-cover .workflow-art-body { gap: 90px; }
+.consulting-case .case-cover .workflow-track { max-width: 400px; }
+.consulting-case .case-cover .workflow-node { padding: 21px 22px; font-size: 15px; }
+.consulting-case .case-cover .workflow-number { font-size: 10px; }
+.consulting-case .case-cover .workflow-art-top { font-size: 9px; }
+.consulting-case .case-cover .workflow-art-bottom { font-size: 7px; }
+.consulting-case .next-project h3 { font-size: clamp(21px, 3vw, 38px); line-height: 1.5; letter-spacing: 0; }
+.consultant-contact .contact-intro h2 svg { right: 8%; }
+.consultant-footer { flex-wrap: wrap; gap: 22px; }
+.footer-experiences { display: flex; gap: 22px; margin-left: auto; align-items: center; font-size: 9px; }
+.footer-experiences a { display: flex; align-items: center; gap: 7px; padding: 7px 0; }
+.consultant-footer > span { font-size: 8px; margin-left: 0; }
+.consultant-footer > a:last-child { font-size: 8px; }
+@media(min-width:1500px) {
+  .consulting-grid .workflow-art { padding: 36px 44px; }
+  .consulting-grid .workflow-node { font-size: 13px; padding: 17px; }
+}
+@media(max-width:1100px) {
+  .consultant-hero .hero-intro { width: 260px; }
+  .consultant-hero .hero-intro > p { font-size: 20px; }
+  .consultant-hero .hero-intro > span { font-size: 11px; }
+  .hero-actions { gap: 13px; }
+  .hero-actions .text-link, .hero-actions > a:last-child { font-size: 10px; }
+  .consultant-about { gap: 45px; }
+  .workflow-art { padding: 24px; }
+  .workflow-art-body { gap: 18px; }
+  .workflow-node { font-size: 10px; padding: 10px; gap: 9px; }
+  .workflow-hero .workflow-art-body { gap: 25px; }
+  .workflow-hero .workflow-node { padding: 13px 12px; font-size: 10px; }
+  .workflow-hero { padding-bottom: 77px; }
+  .consulting-case .case-heading-grid { gap: 35px; }
+  .consulting-case .case-cover .workflow-art { padding: 35px 45px; }
+  .consulting-method { grid-template-columns: 1fr; gap: 28px; }
+  .consulting-method > div { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+  .consulting-method > div h3 { margin-top: 0; }
+}
+@media(max-width:760px) {
+  .consultant-header { height: 75px; }
+  .consultant-header .header-actions { margin-left: auto; }
+  .consultant-header .main-nav { align-items: stretch; gap: 0; }
+  .consultant-header .main-nav a { padding: 16px 0; font-size: 16px; }
+  .consultant-header .main-nav .contact-link { font-size: 16px; padding: 16px 0; justify-content: space-between; }
+  .consultant-hero .hero-top .eyebrow { font-size: 6px; letter-spacing: .04em; }
+  .consultant-hero .hero-top .availability { font-size: 7px; }
+  .consultant-hero .hero-heading-wrap { margin-top: 30px; margin-bottom: 30px; }
+  .consultant-hero h1 { font-size: clamp(76px, 19vw, 118px); }
+  .consultant-hero .hero-intro { width: 100%; margin-top: 28px; }
+  .consultant-hero .hero-intro > p { font-size: 17px; margin-bottom: 0; }
+  .consultant-hero .hero-intro > span { font-size: 10px; line-height: 1.85; }
+  .hero-actions { margin-top: 18px; gap: 25px; grid-column: 1 / -1; }
+  .hero-actions .text-link, .hero-actions > a:last-child { font-size: 10px; }
+  .consultant-featured { height: 295px; }
+  .consultant-featured-caption { left: 21px; right: 21px; bottom: 15px; padding-top: 12px; font-size: 7px; }
+  .consultant-hero .hero-footnote span { font-size: 6px; }
+  .consultant-about { margin-top: 38px; gap: 34px; }
+  .consultant-about .about-label { display: grid; grid-template-columns: 90px 1fr; column-gap: 38px; }
+  .consultant-about .about-label > .eyebrow { grid-column: 1 / -1; }
+  .consultant-about .about-mark { font-size: 100px; margin: 26px 0 0; }
+  .consultant-about .about-mark i { font-size: 58px; right: -25px; }
+  .consultant-identity { margin-top: 28px; }
+  .consultant-identity strong { font-size: 17px; }
+  .consultant-identity strong span { font-size: 16px; margin-top: 3px; }
+  .consultant-identity p { font-size: 9px; line-height: 1.9; margin-top: 10px; }
+  .consultant-about .about-content h2 { margin: 0 0 22px; font-size: 28px; }
+  .consultant-about .about-content > p { font-size: 12px; line-height: 2.1; }
+  .consultant-about .about-content > .about-lead { font-size: 14px; }
+  .experience-lines { margin-top: 25px; }
+  .experience-lines > div { grid-template-columns: 100px 1fr; gap: 15px; padding: 14px 0; }
+  .experience-lines span { font-size: 7px; }
+  .experience-lines p { font-size: 10px; line-height: 1.8; }
+  .service-links { gap: 22px; flex-wrap: wrap; margin-top: 15px; }
+  .service-links > a:last-child:not(:first-child) { font-size: 10px; }
+  .consultant-services .service-detail > p { font-size: 12px; }
+  .consultant-services .service-detail > span { font-size: 10px; }
+  .service-deliverables strong { font-size: 8px; }
+  .consulting-method { margin-top: 35px; padding-top: 25px; gap: 26px; }
+  .consulting-method > div { display: block; }
+  .consulting-method > div h3 { margin-top: 10px; font-size: 19px; }
+  .consulting-method ol { grid-template-columns: 1fr 1fr; gap: 25px 22px; }
+  .consulting-method h4 { font-size: 14px; margin: 9px 0 8px; }
+  .consulting-method p { font-size: 11px; }
+  .consultant-work { padding-top: 20px; }
+  .case-groups { gap: 24px; }
+  .case-groups button { font-size: 11px; }
+  .case-group-description { font-size: 10px; margin-bottom: 26px; }
+  .consulting-grid .project-card:nth-child(even) { margin-top: 0; }
+  .consulting-grid .project-meta h3 { font-size: 20px; }
+  .consultant-work .project-meta p { font-size: 10px; }
+  .case-status { font-size: 9px; }
+  .workflow-art { padding: 21px; gap: 18px; aspect-ratio: 1.3; }
+  .workflow-art-top, .workflow-art-top > span:last-child { font-size: 6px; }
+  .workflow-art-body { gap: 18px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+  .workflow-art-title { font-size: clamp(32px, 9vw, 48px); }
+  .workflow-node { font-size: 9px; gap: 8px; padding: 10px 8px; }
+  .workflow-track { gap: 11px; }
+  .workflow-number { font-size: 7px; }
+  .workflow-node-mark { font-size: 13px; }
+  .workflow-art-bottom { font-size: 4.5px; gap: 10px; padding-top: 10px; }
+  .workflow-rule { margin-top: 20px; width: 27px; }
+  .workflow-hero { padding: 21px 21px 64px; }
+  .workflow-hero .workflow-art-title { font-size: clamp(40px, 11vw, 60px); }
+  .workflow-hero .workflow-art-body { grid-template-columns: 1fr 1fr; gap: 19px; }
+  .workflow-hero .workflow-node { font-size: 9px; padding: 12px 8px; }
+  .consulting-case .case-heading-grid { grid-template-columns: 1fr; gap: 26px; }
+  .consulting-case .case-heading h1 { font-size: 35px; line-height: 1.5; margin-bottom: 13px; }
+  .consulting-case .case-heading-english { font-size: 29px; max-width: 350px; }
+  .consulting-case .case-heading-aside > p { font-size: 12px; }
+  .consulting-case .case-cover .workflow-art { aspect-ratio: 1.17; padding: 23px 20px; }
+  .consulting-case .case-cover .workflow-art-title { font-size: clamp(31px, 10vw, 42px); }
+  .consulting-case .case-cover .workflow-art-body { gap: 18px; }
+  .consulting-case .case-cover .workflow-art-top { font-size: 6px; }
+  .consulting-case .case-cover .workflow-art-bottom { font-size: 4.5px; }
+  .consulting-case .case-cover .workflow-node { font-size: 9px; padding: 12px 8px; }
+  .consulting-case .case-cover .workflow-number { font-size: 7px; }
+  .consulting-case .next-project h3 { font-size: 20px; }
+  .consultant-contact .contact-intro h2 svg { right: 2%; }
+  .consultant-footer { gap: 18px; }
+  .footer-experiences { order: 4; flex-basis: 100%; margin: 0; font-size: 10px; }
+  .consultant-footer > span { font-size: 7px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .consultant-featured:hover .consultant-featured-caption svg { transform: none; }
+}

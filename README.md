@@ -1,16 +1,18 @@
-# Kevin — Independent Design & Development
+# Kevin Chou — AI & Digital Transformation
 
-低彩度接案作品集，以品牌／生活風格客戶為方向。前台部署 GitHub Pages，會員與訂單 API 使用 Cloudflare Workers + D1。
+周靖翔 Kevin Chou 的 AI 與數位轉型顧問網站。保留暖白、灰綠與字體對比，加入深藍與銅色的流程視覺。前台部署 GitHub Pages，會員與訂單 API 使用 Cloudflare Workers + D1。
 
 ## 發布狀態
 
 前台為 `https://kevin-1215.github.io/portfolio/`；API 為 `https://kevin-portfolio-api.kevin-design-lab.workers.dev`。Cloudflare Workers + D1 已部署，公開設定只有 API 網址與資源 ID，不含登入憑證。
 
-會員、收藏、個人偏好、登入／登出、訂單隔離與伺服器計價已通過雲端的 21 項整合檢查。驗證使用隨機產生的測試帳密，完成後刪除這兩個測試帳號及其關聯資料。帳號為作品體驗用途，沒有 Email 驗證、密碼重設或 MFA。
+會員、收藏、個人偏好、登入／登出、訂單隔離、伺服器計價與五項服務洽詢已通過雲端的 23 項整合檢查。驗證使用隨機產生的測試帳密，完成後刪除這兩個測試帳號及其關聯資料。帳號為作品體驗用途，沒有 Email 驗證、密碼重設或 MFA。
 
-Folio 為已上線的自主開發工具；AURA、日常之物、FORMA 為自主概念，皆不代表商業委託或既有客戶業績。四個案例各自記錄問題、角色、設計取捨、驗證方式與實作範圍。商店不販售、不扣款、不出貨。
+首頁依序為首頁、關於我、服務內容、參考案例及聯絡資訊。服務包含 AI 顧問服務、流程優化、網站建置、SEO 優化與其他系統建置；五項服務的交付內容與洽詢選項保持一致。
 
-首頁提供「釐清 → 編排 → 實作」互動名片示範，可改品牌、選配色、切換正反面並下載 SVG。合作入口使用擁有者確認公開的 `kevinchou@innodanc.com`，三步引導可免登入整理、複製或下載需求摘要，並開啟 Email 草稿；沒有自動寄送訊息。已登入會員可另行選擇儲存至 D1 洽詢紀錄，目前尚未啟用 Email 通知。
+參考案例預設呈現三個過往專案匿名摘要與一份 Power Automate 架構規格示例，內容依擁有者提供的履歷與規格文件整理，不公開原始履歷、報價、私人聯絡資料或客戶畫面。「網站與系統展示」分類保留 Folio、AURA、日常之物與 FORMA。Folio 為已上線的自主工具，其餘為自主概念；商店不販售、不扣款、不出貨。互動名片保留於 Folio 案例內頁。
+
+合作入口使用擁有者確認公開的 `kevinchou@innodanc.com`。服務入口可預選需求類型，三步引導可免登入整理、複製或下載摘要，並開啟 Email 草稿；沒有自動寄送訊息。已登入會員可另行選擇儲存至 D1 洽詢紀錄，目前尚未啟用 Email 通知。
 
 ## 本機開發
 
@@ -29,7 +31,7 @@ npm run check:static
 npm run preview
 ```
 
-`out/` 為含首頁、會員、商店、四個案例和 404 的八個預先渲染頁面。建置後會檢查站內路徑、主標題、重複 ID 與公開 API 狀態；GitHub Actions 也執行相同檢查。`npm run preview` 可檢查與公開網站一致的功能狀態。
+`out/` 為含首頁、會員、商店、八個案例和 404 的十二個預先渲染頁面。建置後檢查站內路徑、主標題、重複 ID、區塊順序、五項服務與公開 API 設定；GitHub Actions 也執行相同檢查。`npm run preview` 可檢查與公開網站一致的功能狀態。
 
 ## GitHub Pages
 

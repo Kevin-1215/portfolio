@@ -1,17 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Copy, Download, Mail } from "lucide-react";
 import { apiEnabled } from "@/lib/client";
 import { post, useMember } from "./site";
+import { serviceNames, type ServiceName } from "@/lib/services";
 export const contactEmail = "kevinchou@innodanc.com";
-const services = ["品牌形象網站", "會員系統", "電子商務", "其他合作"];
-const featureOptions = ["品牌與內容呈現", "作品或商品展示", "會員與權限", "購買流程", "既有系統串接", "一起釐清需求"];
+const services = [...serviceNames, "其他合作"];
+const featureOptions = ["AI 應用評估", "流程盤點與 SOP", "RPA / OCR 自動化", "網站與會員功能", "SEO 技術檢查", "既有系統整合", "資料平台與報表", "一起釐清需求"];
 const steps = ["想做什麼", "範圍與時程", "整理與聯絡"];
 type Brief = { service: string; features: string[]; budget: string; timeframe: string; message: string; name: string; email: string };
-export default function ContactBrief() {
+export default function ContactBrief({ selectedService = serviceNames[0], selectionKey = 0 }: { selectedService?: ServiceName; selectionKey?: number }) {
   const { me } = useMember();
   const [step, setStep] = useState(0); const [brief, setBrief] = useState<Brief>({ service: services[0], features: [], budget: "尚未確定", timeframe: "尚未確定", message: "", name: "", email: "" });
   const [submitted, setSubmitted] = useState(false); const [busy, setBusy] = useState(false); const [cloudSaved, setCloudSaved] = useState(false); const [notice, setNotice] = useState(""); const [error, setError] = useState("");
   const description = useRef<HTMLTextAreaElement>(null); const heading = useRef<HTMLHeadingElement>(null); const summaryField = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => { setBrief(previous => ({ ...previous, service: selectedService })); setSubmitted(false); setStep(0); }, [selectedService, selectionKey]);
   function change<K extends keyof Brief>(key: K, value: Brief[K]) { setBrief(previous => ({ ...previous, [key]: value })); }
   function go(next: number) { if (next === 2 && !description.current?.reportValidity()) return; setStep(next); setError(""); requestAnimationFrame(() => heading.current?.focus()); }
   function toggleFeature(value: string) { change("features", brief.features.includes(value) ? brief.features.filter(f => f !== value) : [...brief.features, value]); }
