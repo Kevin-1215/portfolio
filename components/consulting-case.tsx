@@ -1,6 +1,7 @@
 import { cases, type CaseStudyData } from "@/lib/cases";
 import { Header, Footer, sitePath } from "./site";
 import { ContactAction } from "./page-layout";
+import ProjectDiagram from "./project-diagram";
 
 export default function ConsultingCase({ project }: { project: CaseStudyData }) {
   const specification = project.kind === "specification";
@@ -9,6 +10,7 @@ export default function ConsultingCase({ project }: { project: CaseStudyData }) 
   return <><Header active="work" /><main id="main" className="marketing-main consulting-detail">
     <a className="page-back" href={sitePath(specification ? "/work/?group=specification" : "/work/")}>回到參考案例</a>
     <header className="project-intro"><p className="page-kicker">{project.type}</p><h1>{project.name}</h1><p>{project.intro}</p></header>
+    <ProjectDiagram id={project.id} />
     <dl className="project-facts"><div><dt>{specification ? "應用情境" : "客戶背景"}</dt><dd>{project.industry}</dd></div><div><dt>專案內容</dt><dd>{project.scope}</dd></div><div><dt>我的工作</dt><dd>{project.role}</dd></div><div><dt>使用技術</dt><dd>{project.stack}</dd></div></dl>
     <div className="project-detail-columns"><article className="project-detail-body"><section><h2>{project.question}</h2><p>{project.context}</p></section><section><h2>{specification ? "規格設計內容" : "我做了哪些工作"}</h2><div className="project-work-items">{project.decisions.map(item => <div key={item.title}><h3>{item.title}</h3><p>{item.text}</p></div>)}</div></section>
       {project.parameters && <section><h2>規格中的判斷條件</h2><div className="project-table-wrap"><table className="project-parameters"><thead><tr><th>項目</th><th>範例設定</th><th>處理方式</th></tr></thead><tbody>{project.parameters.map(item => <tr key={item.label}><th scope="row">{item.label}</th><td>{item.value}</td><td>{item.note}</td></tr>)}</tbody></table></div></section>}

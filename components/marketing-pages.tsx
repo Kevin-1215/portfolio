@@ -51,9 +51,9 @@ function WorkPage() {
 }
 
 function ContactPage() {
-  const [service, setService] = useState<ServiceName>(serviceNames[0]);
+  const [service, setService] = useState<ServiceName>();
   useEffect(() => { const value = new URLSearchParams(location.search).get("service"); if (serviceNames.includes(value as ServiceName)) setService(value as ServiceName); }, []);
-  return <><PageIntro label="CONTACT" title="聯絡資訊" description="可以直接來信，或用需求表單整理要討論的內容。" /><div className="contact-page-grid"><aside className="contact-page-info"><h2>合作洽詢</h2><p>AI 應用評估、流程優化、網站建置及系統整合，都可以先說明目前遇到的問題。</p><a className="contact-page-email" href={`mailto:${contactEmail}`}>{contactEmail}</a><h3>開始討論前，可以先提供</h3><ul className="plain-bullets"><li>目前的作業或現有系統。</li><li>想改善的問題與期待成果。</li><li>相關資料、預算方向及希望時程。</li></ul><p className="contact-page-note">整理摘要不會自動寄信。完成後可開啟 Email 草稿或下載需求文字檔。</p></aside><div className="contact-page-form"><ContactBrief selectedService={service} /></div></div></>;
+  return <><PageIntro label="CONTACT" title="聯絡資訊" description="先選擇想討論的服務，再補充需求。完成後，透過 Email 寄給 Kevin。" /><div className="contact-page-form"><ContactBrief selectedService={service} /></div><aside className="contact-page-notes" aria-label="填寫與聯絡說明"><div><h2>還沒有完整規劃，也可以開始</h2><p>選單只是討論的起點。先說明目前遇到的問題即可，預算、時程與功能範圍都可以後續確認。</p></div><div><h2>想直接聯絡？</h2><p>也可以直接寄信，簡單介紹你的公司、目前的作業與想改善的問題。</p><a className="contact-page-email" href={`mailto:${contactEmail}`}>{contactEmail}</a></div></aside></>;
 }
 
 export default function MarketingPage({ page }: { page: MarketingPageId }) {
