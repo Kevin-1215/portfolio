@@ -67,7 +67,6 @@
 .about-page-content > h2:not(:first-child) { margin-top: 36px; }
 .career-list { margin-top: 18px; }
 .career-list article { padding: 20px 0; border-top: 1px solid var(--line); }
-.career-list article > h3 + p { margin-top: 8px; }
 .career-list .career-role { font-size: .875rem; font-weight: 600; color: var(--accent); margin: 4px 0 10px; }
 .services-page-grid { display: grid; grid-template-columns: 270px 1fr; gap: 50px; }
 .service-page-tabs { display: flex; flex-direction: column; align-self: start; border-top: 1px solid var(--line); }
