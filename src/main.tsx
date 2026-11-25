@@ -4,6 +4,7 @@ import App from "./app";
 import "../app/globals.css";
 import "../app/enhancements.css";
 import "../app/consulting.css";
+import "../app/multipage.css";
 const root=document.getElementById("root")!;
 const app=<React.StrictMode><App path={location.pathname}/></React.StrictMode>;
 if(root.querySelector("main"))hydrateRoot(root,app);else createRoot(root).render(app);

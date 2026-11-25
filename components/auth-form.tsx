@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api, apiEnabled, setSession, sitePath } from "@/lib/client";
 import { Arrow } from "./site";
-const destinations: Record<string,string> = { shop:"/shop/",contact:"/#contact",folio:"/work/folio/",aura:"/work/aura/",objects:"/work/objects/",forma:"/work/forma/" };
+const destinations: Record<string,string> = { shop:"/shop/",contact:"/contact/",folio:"/work/folio/",aura:"/work/aura/",objects:"/work/objects/",forma:"/work/forma/" };
 export default function AuthForm({ onSuccess }: { onSuccess:()=>Promise<void> }) {
   const [register,setRegister]=useState(false);const [busy,setBusy]=useState(false);const [error,setError]=useState("");
   async function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();const data=Object.fromEntries(new FormData(e.currentTarget));setBusy(true);setError("");try{const result=await api<{token:string}>(`/api/auth/${register?"register":"login"}`,data);setSession(result.token);await onSuccess();const next=new URLSearchParams(location.search).get("next");if(next&&Object.hasOwn(destinations,next))location.assign(sitePath(destinations[next]));}catch(e){setError((e as Error).message);}finally{setBusy(false);}}

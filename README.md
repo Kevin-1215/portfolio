@@ -1,6 +1,6 @@
 # Kevin Chou — AI & Digital Transformation
 
-周靖翔 Kevin Chou 的 AI Automation 與數位轉型顧問網站。保留暖白、灰綠與字體對比，加入深藍與銅色的流程視覺。前台部署 GitHub Pages，會員與訂單 API 使用 Cloudflare Workers + D1。
+周靖翔 Kevin Chou 的 AI Automation 與數位轉型顧問網站。保留暖白、灰綠與字體對比，搭配深藍與銅色的經歷面板。前台部署 GitHub Pages，會員與訂單 API 使用 Cloudflare Workers + D1。
 
 ## 發布狀態
 
@@ -8,11 +8,11 @@
 
 會員、收藏、個人偏好、登入／登出、訂單隔離、伺服器計價與五項服務洽詢已通過雲端的 23 項整合檢查。驗證使用隨機產生的測試帳密，完成後刪除這兩個測試帳號及其關聯資料。帳號為作品體驗用途，沒有 Email 驗證、密碼重設或 MFA。
 
-首頁依序為首頁、關於我、服務內容、參考案例及聯絡資訊。服務包含 AI 顧問服務、流程優化、網站建置、SEO 優化與其他系統建置；五項服務的交付內容與洽詢選項保持一致。
+主選單連到五個獨立頁面：首頁 `/`、關於我 `/about/`、服務內容 `/services/`、參考案例 `/work/`、聯絡資訊 `/contact/`。首頁只保留定位、經歷摘要與三項精選專案。服務以可切換面板呈現 AI 顧問服務、流程優化、網站建置、SEO 優化與其他系統建置，並可帶入聯絡頁的需求類型。舊版首頁區塊連結會導向對應頁面。
 
-參考案例預設呈現三個過往專案匿名摘要與一份 Power Automate 架構規格示例，內容依擁有者提供的履歷與規格文件整理，不公開原始履歷、報價、私人聯絡資料或客戶畫面。「網站與系統展示」分類保留 Folio、AURA、日常之物與 FORMA。Folio 為已上線的自主工具，其餘為自主概念；商店不販售、不扣款、不出貨。互動名片保留於 Folio 案例內頁。
+參考案例分為五個企業專案、四個網站與工具展示，以及一份流程規格設計。企業專案涵蓋財務對帳與應付帳款、製造業 AI、ESG 平台、ERP 報表檢核及證券開戶自動化。內容依擁有者提供的履歷整理，逐項描述工作、系統、交付與成果；不公開原始履歷、報價、私人聯絡資料或客戶畫面。Power Automate 採購流程為建置規格，未描述為已上線的客戶系統。
 
-案例以具體的專案內容為主標、敘事標語為副標，列表、內頁、下一個案例與分享標題保持一致。網站經歷與服務文案以 AI Automation、生成式 AI 及 AI OCR 為主軸；以 RPA 為主的既有財務案例保留實際技術範圍。
+網站與工具包含 Folio、AURA、日常之物與 FORMA。Folio 為已上線的自主工具，其餘為自主概念；商店不販售、不扣款、不出貨。互動與介面預覽收在案例內可展開的區塊。案例標題直接說明內容，網站經歷與服務以 AI Automation、生成式 AI 及 AI OCR 為主軸；以 RPA 為主的既有財務案例保留實際技術範圍。
 
 合作入口使用擁有者確認公開的 `kevinchou@innodanc.com`。服務入口可預選需求類型，三步引導可免登入整理、複製或下載摘要，並開啟 Email 草稿；沒有自動寄送訊息。已登入會員可另行選擇儲存至 D1 洽詢紀錄，目前尚未啟用 Email 通知。
 
@@ -33,7 +33,7 @@ npm run check:static
 npm run preview
 ```
 
-`out/` 為含首頁、會員、商店、八個案例和 404 的十二個預先渲染頁面。建置後檢查站內路徑、主標題、重複 ID、區塊順序、五項服務與公開 API 設定；GitHub Actions 也執行相同檢查。`npm run preview` 可檢查與公開網站一致的功能狀態。
+`out/` 為含五個主頁、會員、商店、十個案例和 404 的十八個預先渲染頁面。建置後檢查站內路徑、主標題、重複 ID、獨立頁面導覽、具體案例描述、五項服務與公開 API 設定；GitHub Actions 也執行相同檢查。`npm run preview` 可檢查與公開網站一致的功能狀態。
 
 ## GitHub Pages
 
@@ -54,4 +54,4 @@ npm run preview
 - https://images.unsplash.com/photo-1600210492486-724fe5c67fb0
 - https://images.unsplash.com/photo-1600607687939-ce8a6c25118c
 
-陶器與會員視覺由 SVG／CSS 繪製。首頁文字在 `components/portfolio.tsx`；導覽、作品資料與圖像在 `components/site.tsx`；商品資料在 `lib/catalog.ts`；樣式在 `app/globals.css`。
+陶器與會員視覺由 SVG／CSS 繪製。首頁在 `components/portfolio.tsx`，四個主頁在 `components/marketing-pages.tsx`，企業案例在 `components/consulting-case.tsx`，系統案例在 `components/case-study.tsx`。案例資料在 `lib/consulting.ts` 與 `lib/cases.ts`，導覽與圖像在 `components/site.tsx`，商品資料在 `lib/catalog.ts`。多頁版樣式在 `app/multipage.css`，既有互動展示樣式保留在其餘 CSS。

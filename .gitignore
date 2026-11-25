@@ -51,6 +51,7 @@ yarn-error.log*
 !/app/globals.css
 !/app/enhancements.css
 !/app/consulting.css
+!/app/multipage.css
 /components/ui/
 /components/connector-error.tsx
 /lib/*

@@ -2,18 +2,18 @@
 import { useEffect, useId, useState } from "react";
 import { api, apiEnabled, sitePath } from "@/lib/client";
 export { sitePath } from "@/lib/client";
-import { ArrowUpRight, ArrowLeft, Menu, X, UserRound } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { cases } from "@/lib/cases";
 import { FolioArtwork } from "./card-art";
 import WorkflowArtwork from "./workflow-art";
 
-export function Header({ inner = false }: { inner?: boolean }) {
+export function Header({ inner = false, active = inner ? "work" : "home" }: { inner?: boolean; active?: string }) {
   const [open, setOpen] = useState(false);
   useEffect(() => { const close = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); }; document.addEventListener("keydown", close); return () => document.removeEventListener("keydown", close); }, []);
-  return <header className="site-header consultant-header"><a href={sitePath("/")} className="wordmark" aria-label="Kevin 首頁">kevin<span>°</span></a><span className="header-role">AI AUTOMATION & DIGITAL<br />TRANSFORMATION CONSULTANT</span><nav aria-label="主要導覽" className={open ? "main-nav is-open" : "main-nav"}>{[["main", "首頁"], ["about", "關於我"], ["services", "服務內容"], ["work", "參考案例"], ["contact", "聯絡資訊"]].map(([id, name]) => <a key={id} className={id === "contact" ? "contact-link" : undefined} href={`${inner ? sitePath("/") : ""}#${id}`} onClick={() => setOpen(false)}>{name}{id === "contact" && <ArrowUpRight size={15} />}</a>)}</nav><div className="header-actions"><button className="menu-toggle" aria-expanded={open} aria-label={open ? "關閉選單" : "開啟選單"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></header>;
+  return <header className="site-header consultant-header"><a href={sitePath("/")} className="wordmark" aria-label="Kevin 首頁">kevin<span>°</span></a><span className="header-role">AI AUTOMATION & DIGITAL<br />TRANSFORMATION CONSULTANT</span><nav aria-label="主要導覽" className={open ? "main-nav is-open" : "main-nav"}>{[["home", "/", "首頁"], ["about", "/about/", "關於我"], ["services", "/services/", "服務內容"], ["work", "/work/", "參考案例"], ["contact", "/contact/", "聯絡資訊"]].map(([id, path, name]) => <a key={id} className={id === "contact" ? "contact-link" : undefined} aria-current={active === id ? "page" : undefined} href={sitePath(path)} onClick={() => setOpen(false)}>{name}</a>)}</nav><div className="header-actions"><button className="menu-toggle" aria-expanded={open} aria-label={open ? "關閉選單" : "開啟選單"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></header>;
 }
-export function Footer() { return <footer className="site-footer consultant-footer"><a href={sitePath("/")} className="wordmark">kevin<span>°</span></a><p>把流程理清，讓技術落地。</p><div className="footer-experiences"><a href={sitePath("/?work=systems#work")}>網站與系統展示 ↗</a><a href={sitePath("/members/")}><UserRound size={12} />會員體驗</a></div><span>© {new Date().getFullYear()} KEVIN CHOU · TAIWAN</span><a href={sitePath("/#main")}>BACK TO TOP ↑</a></footer>; }
-export function BackLink({ systems = true }: { systems?: boolean }) { return <a className="back-link" href={sitePath(systems ? "/?work=systems#work" : "/#work")}><ArrowLeft size={16} /> 回到參考案例</a>; }
+export function Footer() { return <footer className="site-footer marketing-footer"><a href={sitePath("/")} className="wordmark">kevin<span>°</span></a><nav aria-label="頁尾導覽"><a href={sitePath("/contact/")}>聯絡合作</a><a href={sitePath("/work/?group=systems")}>網站與工具展示</a><a href={sitePath("/members/")}>會員體驗</a></nav><span>© {new Date().getFullYear()} Kevin Chou</span></footer>; }
+export function BackLink({ systems = true }: { systems?: boolean }) { return <a className="back-link" href={sitePath(systems ? "/work/?group=systems" : "/work/")}>回到參考案例</a>; }
 export function Arrow({ size = 20 }: { size?: number }) { return <ArrowUpRight size={size} strokeWidth={1.4} aria-hidden="true" />; }
 export function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) { return <p className="eyebrow"><span className="section-num">{n}</span>{children}</p>; }
 export function Pottery({ shape = "vase", color = "chalk", className = "" }: { shape?: string; color?: string; className?: string }) {

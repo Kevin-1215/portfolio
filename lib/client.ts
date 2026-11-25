@@ -1,7 +1,7 @@
 export const basePath = import.meta.env.BASE_URL || "/";
 export const apiOrigin = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:8787" : "");
 export const apiEnabled = Boolean(apiOrigin);
-export function sitePath(value: string) { const canonical=value.replace(/^(\/(?:members|shop|work\/[a-z-]+))(?=[?#]|$)/,"$1/");return `${basePath.replace(/\/$/,"")}${canonical}`; }
+export function sitePath(value: string) { const canonical=value.replace(/^(\/(?:about|services|contact|members|shop|work(?:\/[a-z-]+)?))(?=[?#]|$)/,"$1/");return `${basePath.replace(/\/$/,"")}${canonical}`; }
 let memoryToken = "";
 function sessionToken() { try { return memoryToken || sessionStorage.getItem("kevin-member-token") || ""; } catch { return memoryToken; } }
 export function setSession(token: string) { memoryToken=token;try { if(token)sessionStorage.setItem("kevin-member-token",token);else sessionStorage.removeItem("kevin-member-token"); }catch{} }
