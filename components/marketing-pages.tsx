@@ -15,7 +15,13 @@ function AboutPage() {
       <aside className="profile-panel"><p className="page-kicker">周靖翔</p><h2>Kevin Chou</h2><p>InnoArk 伊諾方舟科技<br />共同創辦人</p><dl><div><dt>服務產業</dt><dd>科技、製造、金融證券</dd></div><div><dt>跨領域背景</dt><dd>資訊管理、財務金融</dd></div><div><dt>服務經驗</dt><dd>臺灣、泰國、越南</dd></div></dl><ContactAction /></aside>
       <div className="about-page-content"><h2>我能協助的工作</h2><p>我協助企業進行流程盤點與流程優化、規劃數位轉型藍圖，評估 AI、OCR、RPA 與資料平台的導入方式，並將需求轉為系統規格、開發項目與作業文件。經歷涵蓋財務對帳自動化、製造業 AI 導入、ESG 資料平台，以及網站與內部系統建置。</p><p>具 KPMG 管理顧問 Senior Consultant 及精誠資訊開發經歷，參與超過 20 項專案。工作內容從主管與第一線人員訪談、需求分析、流程優化與藍圖規劃，到開發、驗證與交接，也包含企業 AI 應用培訓及技術工作坊。</p>
         <h2>顧問與開發經歷</h2><div className="career-list"><article><h3>InnoArk 伊諾方舟科技</h3><p className="career-role">共同創辦人／數位轉型顧問</p><p>提供 AI Automation、流程優化、RPA 開發與自動化工具導入服務。</p></article><article><h3>KPMG 管理顧問</h3><p className="career-role">Senior Consultant</p><p>企業流程盤點與優化、數位轉型藍圖規劃、AI 與自動化技術評估，以及資料平台與系統整合。</p></article><article><h3>精誠資訊</h3><p className="career-role">程式設計師／RPA Developer</p><p>使用 UiPath、Power Automate 等工具開發跨系統自動化，並以 C#、Angular、Python 建置網站應用與內部工具。</p></article></div>
-        <h2>技術與交付能力</h2><ul className="plain-bullets"><li>AI 應用：生成式 AI、AI OCR 與導入評估；具 Microsoft AI Builder、Google Cloud Vertex AI API 與 Gemini API 使用經驗。</li><li>流程自動化：Python × AI 全客製化流程自動化、UiPath、Power Automate、跨系統串接與例外處理。</li><li>網站與資料：React、Angular、JavaScript、Python、C#、SQL。</li><li>專案交付：從需求訪談、流程分析，到 AI 導入藍圖規劃與設計；涵蓋 As-Is／To-Be 流程、Data Schema、SOP 與 Workshop。</li></ul><a className="button-secondary" href={sitePath("/work/")}>查看相關專案</a>
+        <h2>技術與交付能力</h2>
+        <dl className="capability-list">
+          <div><dt>AI 應用整合</dt><dd><p>評估生成式 AI 與文件辨識的應用情境，整合 AI 工具與企業作業流程。</p><p className="capability-tools"><strong>相關技術：</strong>Microsoft AI Builder、Google Cloud Vertex AI API、Gemini API。</p></dd></div>
+          <div><dt>流程自動化開發</dt><dd><p>以 Python 整合 AI 模型與 API，開發客製化自動化流程，支援跨系統串接與例外處理。</p><p className="capability-tools"><strong>相關技術：</strong>Python、UiPath、Power Automate。</p></dd></div>
+          <div><dt>網站與資料系統開發</dt><dd><p>建置品牌網站、會員功能、內部工具與資料管理系統。</p><p className="capability-tools"><strong>相關技術：</strong>React、Angular、JavaScript、Python、C#、SQL。</p></dd></div>
+          <div><dt>顧問規劃與專案交付</dt><dd><p>從需求訪談、流程分析，到 AI 導入藍圖規劃與方案設計，整理開發規格與交接文件。</p><p className="capability-tools"><strong>交付項目：</strong>現況與目標流程（As-Is／To-Be）、資料結構設計、SOP 與教育訓練。</p></dd></div>
+        </dl><a className="button-secondary" href={sitePath("/work/")}>查看相關專案</a>
       </div>
     </div>
   </>;

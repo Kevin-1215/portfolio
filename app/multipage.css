@@ -68,6 +68,11 @@
 .career-list { margin-top: 18px; }
 .career-list article { padding: 20px 0; border-top: 1px solid var(--line); }
 .career-list .career-role { font-size: .875rem; font-weight: 600; color: var(--accent); margin: 4px 0 10px; }
+.capability-list { margin: 20px 0 28px; }
+.capability-list > div { padding: 20px 0; border-top: 1px solid var(--line); }
+.capability-list dt { font-size: 1.125rem; font-weight: 600; line-height: 1.6; margin-bottom: 8px; }
+.capability-list dd { margin: 0; }
+.marketing-main .capability-tools { margin-top: 10px; font-size: .875rem; color: var(--content-muted); }
 .services-page-grid { display: grid; grid-template-columns: 270px 1fr; gap: 50px; }
 .service-page-tabs { display: flex; flex-direction: column; align-self: start; border-top: 1px solid var(--line); }
 .service-page-tabs button { border-bottom: 1px solid var(--line); min-height: 62px; text-align: left; padding: 14px 18px; font-size: 1rem; line-height: 1.5; }
