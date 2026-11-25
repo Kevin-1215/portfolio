@@ -41,6 +41,8 @@ npm run preview
 
 使用儲存庫 `Kevin-1215/portfolio`。Settings → Pages 設定來源為 **GitHub Actions**，推送至 `main` 會執行 `.github/workflows/pages.yml`。是否發布成功以 GitHub Actions 與實際網站為準。
 
+發布前會確認本次上傳的 artifact ID 已出現在 GitHub API，最多等待十二次再部署，避免檔案剛上傳時的 metadata 延遲；無法確認時會停止發布並保留既有網站。
+
 前台完整支援 `/portfolio/` 子路徑。更新網域或儲存庫名稱時，調整 `config/public.json` 的 `basePath` 與預先渲染的 canonical URL。
 
 ## Cloudflare
