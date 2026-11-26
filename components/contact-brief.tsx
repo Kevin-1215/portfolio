@@ -4,7 +4,7 @@ import { apiEnabled } from "@/lib/client";
 import { post, useMember } from "./site";
 import { serviceNames, type ServiceName } from "@/lib/services";
 
-export const contactEmail = "kevinchou@innodanc.com";
+export const contactEmail = "kevin122815@gmail.com";
 const services = [
   { value: serviceNames[0], label: "AI 顧問服務", note: "AI 應用評估與導入規劃" },
   { value: serviceNames[1], label: "流程優化", note: "作業盤點與自動化改善" },
