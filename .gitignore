@@ -60,6 +60,7 @@ yarn-error.log*
 !/lib/cases.ts
 !/lib/consulting.ts
 !/lib/services.ts
+!/lib/mail-compose.ts
 /examples/
 /hooks/
 /vendor/
@@ -71,6 +72,7 @@ yarn-error.log*
 !/scripts/check-hybrid-api.mjs
 !/scripts/dev-all.mjs
 !/scripts/github-release.mjs
+!/scripts/check-contact-email.mjs
 /next.config.ts
 /cloudflare-env.d.ts
 /components.json

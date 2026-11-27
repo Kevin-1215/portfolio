@@ -11,6 +11,7 @@
     "preview": "vite preview --host 127.0.0.1 --port 5173",
     "check": "tsc --noEmit",
     "check:static": "node scripts/check-static.mjs",
+    "test:contact": "node --experimental-strip-types scripts/check-contact-email.mjs",
     "api:dev": "wrangler dev --config cloudflare/wrangler.jsonc --ip 127.0.0.1 --port 8787",
     "api:deploy": "wrangler deploy --config cloudflare/wrangler.jsonc",
     "api:migrate": "wrangler d1 migrations apply DB --config cloudflare/wrangler.jsonc --remote",

@@ -3,6 +3,7 @@ import { Check, Copy, Download, Mail } from "lucide-react";
 import { apiEnabled } from "@/lib/client";
 import { post, useMember } from "./site";
 import { serviceNames, type ServiceName } from "@/lib/services";
+import { buildMailCompose, mailMethods, suggestMailMethod, type MailMethod } from "@/lib/mail-compose";
 
 export const contactEmail = "kevin122815@gmail.com";
 const services = [
@@ -26,6 +27,8 @@ export default function ContactBrief({ selectedService, selectionKey = 0 }: { se
   const [cloudSaved, setCloudSaved] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const [mailMethod, setMailMethod] = useState<MailMethod>("default");
+  const [previewOpen, setPreviewOpen] = useState(false);
   const description = useRef<HTMLTextAreaElement>(null);
   const firstService = useRef<HTMLInputElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -34,7 +37,7 @@ export default function ContactBrief({ selectedService, selectionKey = 0 }: { se
 
   useEffect(() => {
     setBrief(previous => ({ ...previous, service: selectedService || "" }));
-    setSubmitted(false); setStep(0); setError("");
+    setSubmitted(false); setStep(0); setError(""); setPreviewOpen(false);
   }, [selectedService, selectionKey]);
   useEffect(() => { if (submitted) completeHeading.current?.focus(); }, [submitted]);
 
@@ -55,13 +58,15 @@ export default function ContactBrief({ selectedService, selectionKey = 0 }: { se
   function toggleFeature(value: string) { change("features", brief.features.includes(value) ? brief.features.filter(f => f !== value) : [...brief.features, value]); }
   const serviceLabel = services.find(service => service.value === brief.service)?.label || brief.service;
   const summary = `合作需求摘要\n\n稱呼：${brief.name}\n聯絡信箱：${brief.email}\n想討論的服務：${serviceLabel}\n關注的功能：${brief.features.join("、") || "一起討論"}\n預算方向：${brief.budget}\n期待時程：${brief.timeframe}\n\n需求說明：\n${brief.message}\n\n收件聯絡：${contactEmail}\n本摘要不會自動寄出。`;
-  const mailBody = `Kevin 你好，\n\n想討論${brief.service === "其他合作" ? "需求與合作方向" : serviceLabel}。\n稱呼：${brief.name}\n聯絡信箱：${brief.email}\n預算方向：${brief.budget}\n期待時程：${brief.timeframe}\n關注的功能：${brief.features.join("、") || "一起討論"}\n\n${brief.message.slice(0, 180)}${brief.message.length > 180 ? "…\n（完整需求可附上下載的摘要）" : ""}`;
-  const mailHref = `mailto:${contactEmail}?subject=${encodeURIComponent(`合作洽詢｜${serviceLabel}`)}&body=${encodeURIComponent(mailBody)}`;
+  const mailBody = `Kevin 你好，\n\n想討論${brief.service === "其他合作" ? "需求與合作方向" : serviceLabel}。\n稱呼：${brief.name}\n聯絡信箱：${brief.email}\n預算方向：${brief.budget}\n期待時程：${brief.timeframe}\n關注的功能：${brief.features.join("、") || "一起討論"}\n\n需求說明：\n${brief.message}`;
+  const compose = buildMailCompose(mailMethod, { to: contactEmail, subject: `合作洽詢｜${serviceLabel}`, body: mailBody });
+  const method = mailMethods.find(option => option.id === mailMethod)!;
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (step < 2) { go(step + 1); return; }
-    setError(""); setCloudSaved(false); setSubmitted(true);
+    setError(""); setCloudSaved(false); setNotice(""); setPreviewOpen(false);
+    setMailMethod(suggestMailMethod(brief.email)); setSubmitted(true);
   }
   async function saveCloud() {
     setBusy(true); setError("");
@@ -78,16 +83,28 @@ export default function ContactBrief({ selectedService, selectionKey = 0 }: { se
     setNotice("需求摘要已開始下載，可以附在合作 Email 裡。");
   }
   async function copy() {
-    try { await navigator.clipboard.writeText(summary); setNotice("需求已複製，可以貼到你的 Email。"); }
-    catch { summaryField.current?.focus(); summaryField.current?.select(); setNotice("已選取摘要，請使用複製快捷鍵。"); }
+    try { await navigator.clipboard.writeText(mailBody); setNotice("完整需求已複製，開啟草稿後可直接貼上。"); }
+    catch {
+      setPreviewOpen(true);
+      requestAnimationFrame(() => { summaryField.current?.focus(); summaryField.current?.select(); });
+      setNotice("已展開完整需求，請長按文字或使用複製快捷鍵。");
+    }
+  }
+  async function copyAddress() {
+    try { await navigator.clipboard.writeText(contactEmail); setNotice("收件信箱已複製。"); }
+    catch { setNotice("請長按下方的收件信箱並複製。"); }
   }
 
   if (submitted) return <div className="brief-complete">
     <div className="brief-complete-icon"><Check size={22} aria-hidden="true" /></div>
-    <p className="page-kicker">需求已整理完成</p><h2 ref={completeHeading} tabIndex={-1}>最後一步：寄出合作需求</h2>
-    <p>接著請開啟 Email 草稿，確認內容後寄給 Kevin，即完成聯絡。</p>
-    <div className="brief-send-action"><a href={mailHref} className="button-primary"><Mail size={18} aria-hidden="true" />開啟 Email 草稿</a><p>會開啟你的信箱程式，由你確認並寄出。若未開啟，可複製下方摘要，直接寄至 <a href={`mailto:${contactEmail}`}>{contactEmail}</a>。</p></div>
-    <details className="brief-preview"><summary>查看、複製或下載完整摘要</summary><label className="brief-summary-label">你的需求摘要<textarea ref={summaryField} value={summary} readOnly rows={8} /></label><div className="brief-file-actions"><button onClick={() => void copy()}><Copy size={16} aria-hidden="true" />複製摘要</button><button onClick={download}><Download size={16} aria-hidden="true" />下載文字檔</button></div></details>
+    <p className="page-kicker">需求已整理完成</p><h2 ref={completeHeading} tabIndex={-1}>選擇寄信方式</h2>
+    <p>選擇你常用的信箱，開啟草稿後確認並寄出，即完成聯絡。</p>
+    <fieldset className="brief-mail-methods" aria-describedby="mail-method-note"><legend>想用哪個信箱寄出？</legend>{mailMethods.map(option => <label key={option.id}><input type="radio" name="mail-method" checked={mailMethod === option.id} onChange={() => setMailMethod(option.id)} /><span>{option.label}</span></label>)}</fieldset>
+    {compose.requiresCopy && <div className="brief-help-note"><strong>需求較長，請先複製全文</strong><p>先點「複製完整需求」，再開啟草稿貼上。收件人與主旨仍會自動帶入。</p></div>}
+    <div className="brief-send-action"><div className="brief-send-buttons">{compose.requiresCopy && <button className="button-primary" onClick={() => void copy()}><Copy size={18} aria-hidden="true" />複製完整需求</button>}<a href={compose.href} className={compose.requiresCopy ? "button-secondary" : "button-primary"} target={mailMethod === "default" ? undefined : "_blank"} rel={mailMethod === "default" ? undefined : "noopener noreferrer"}><Mail size={18} aria-hidden="true" />{method.action}</a></div><p id="mail-method-note">{method.note}</p><p>若登入後沒有帶入內容，可複製完整需求，再貼到草稿內。草稿需要由你確認並寄出。</p></div>
+    <div className="brief-file-actions">{!compose.requiresCopy && <button onClick={() => void copy()}><Copy size={16} aria-hidden="true" />複製完整需求</button>}<button onClick={() => void copyAddress()}>複製收件信箱</button><button onClick={download}><Download size={16} aria-hidden="true" />下載文字檔</button></div>
+    <p className="brief-contact-address">收件人：<span>{contactEmail}</span></p>
+    <details className="brief-preview" open={previewOpen} onToggle={event => setPreviewOpen(event.currentTarget.open)}><summary>查看完整需求</summary><label className="brief-summary-label">可直接貼到信件內文<textarea ref={summaryField} value={mailBody} readOnly rows={8} /></label></details>
     {apiEnabled && me?.user && <details className="brief-member-save"><summary>會員：另存需求紀錄</summary><p className="form-note">這只會保存在本站，不會通知 Kevin；聯絡仍請寄出 Email。</p><button className="text-link" disabled={busy || cloudSaved} onClick={() => void saveCloud()}>{cloudSaved ? "已另存需求紀錄" : busy ? "正在儲存…" : "另存需求紀錄"}</button></details>}
     <button className="brief-back" onClick={() => { setSubmitted(false); setStep(0); setNotice(""); requestAnimationFrame(() => heading.current?.focus()); }}>返回修改需求</button>
     {notice && <p className="feedback" role="status">{notice}</p>}{error && <p className="form-error" role="alert">{error}</p>}
@@ -111,7 +128,7 @@ export default function ContactBrief({ selectedService, selectionKey = 0 }: { se
       {step === 2 && <>
         <div className="brief-review"><span>{serviceLabel}</span><p>{brief.message}</p><small>{brief.budget} · {brief.timeframe}{brief.features.length > 0 && ` · ${brief.features.join("、")}`}</small></div>
         <div className="form-grid"><label>怎麼稱呼你<input value={brief.name} onChange={event => change("name", event.target.value)} autoComplete="name" maxLength={60} required placeholder="姓名或公司名稱" /></label><label>聯絡信箱<input type="email" value={brief.email} onChange={event => change("email", event.target.value)} autoComplete="email" maxLength={150} required placeholder="you@yourbrand.com" /></label></div>
-        <div className="brief-help-note"><strong>接下來怎麼做？</strong><p>按「整理需求，準備寄信」後，會提供 Email 草稿與完整摘要。你確認並寄出 Email 後，才會完成聯絡。</p></div>
+        <div className="brief-help-note"><strong>接下來怎麼做？</strong><p>整理需求後，可選擇常用信箱開啟草稿。你確認並寄出 Email 後，才會完成聯絡。</p></div>
       </>}
     </div>
     <div className="brief-navigation">{step > 0 ? <button type="button" className="brief-back" onClick={() => go(step - 1)}>上一步</button> : <span className="brief-optional">先選一項，後續仍可調整。</span>}{step < 2 ? <button key="next-step" type="button" className="solid-button" onClick={() => go(step + 1)}>{step === 0 ? "下一步：說明需求" : "下一步：聯絡方式"}</button> : <button key="submit-brief" type="submit" className="solid-button">整理需求，準備寄信</button>}</div>

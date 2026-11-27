@@ -5,6 +5,7 @@ import { Header, Footer, sitePath } from "./site";
 import { PageIntro, ContactAction } from "./page-layout";
 import CaseCard from "./case-card";
 import ContactBrief, { contactEmail } from "./contact-brief";
+import DirectEmailLinks from "./direct-email-links";
 
 export type MarketingPageId = "about" | "services" | "work" | "contact";
 
@@ -59,7 +60,7 @@ function WorkPage() {
 function ContactPage() {
   const [service, setService] = useState<ServiceName>();
   useEffect(() => { const value = new URLSearchParams(location.search).get("service"); if (serviceNames.includes(value as ServiceName)) setService(value as ServiceName); }, []);
-  return <><PageIntro label="CONTACT" title="聯絡資訊" description="先選擇想討論的服務，再補充需求。完成後，透過 Email 寄給 Kevin。" /><div className="contact-page-form"><ContactBrief selectedService={service} /></div><aside className="contact-page-notes" aria-label="填寫與聯絡說明"><div><h2>還沒有完整規劃，也可以開始</h2><p>選單只是討論的起點。先說明目前遇到的問題即可，預算、時程與功能範圍都可以後續確認。</p></div><div><h2>想直接聯絡？</h2><p>也可以直接寄信，簡單介紹你的公司、目前的作業與想改善的問題。</p><a className="contact-page-email" href={`mailto:${contactEmail}`}>{contactEmail}</a></div></aside></>;
+  return <><PageIntro label="CONTACT" title="聯絡資訊" description="先選擇想討論的服務，再補充需求。完成後，可選常用的信箱開啟草稿並寄出。" /><div className="contact-page-form"><ContactBrief selectedService={service} /></div><aside className="contact-page-notes" aria-label="填寫與聯絡說明"><div><h2>還沒有完整規劃，也可以開始</h2><p>選單只是討論的起點。先說明目前遇到的問題即可，預算、時程與功能範圍都可以後續確認。</p></div><div><h2>想直接聯絡？</h2><p>點選信箱會開啟裝置預設郵件，也可以使用下方的網頁信箱，簡單介紹目前的問題。</p><a className="contact-page-email" href={`mailto:${contactEmail}`}>{contactEmail}</a><DirectEmailLinks email={contactEmail} /></div></aside></>;
 }
 
 export default function MarketingPage({ page }: { page: MarketingPageId }) {
